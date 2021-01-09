@@ -17,7 +17,13 @@ export default function Auth(Component, loginRequired) {
             history.push("/login");
           }
           if (res.status === 200 && !loginRequired) {
-            if (!myLocation.place && window.location.pathname !== "/") {
+            if (
+              !myLocation.place &&
+              (window.location.pathname !== "/" ||
+                window.location.pathname !== "/mypage" ||
+                window.location.pathname !== "/recruitedParty" ||
+                window.location.pathname !== "/participatedParty")
+            ) {
               if (window.location.pathname === "/address/confirm") {
                 history.replace("/address/confirm");
               } else {
