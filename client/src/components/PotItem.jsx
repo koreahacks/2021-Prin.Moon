@@ -27,10 +27,11 @@ export default function PotItem({ ...props }) {
     padding-left: 13px;
   `;
   const PotEndTime = styled.div`
-    flex: 0 70px;
+    flex: 0 80px;
     padding: 3px 1px;
     text-align: right;
     color: red;
+    font-size: small;
   `;
 
   return (
