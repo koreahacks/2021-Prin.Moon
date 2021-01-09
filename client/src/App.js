@@ -6,14 +6,23 @@ import MainPage from "./pages/MainPage";
 import LoginPage from "./pages/LoginPage";
 import MyPage from "./pages/MyPage";
 import PartyMakingPage from "./pages/PartyMakingPage";
+import CategorySelectPage from "./pages/CategorySelectPage";
+import DeliveryCategoryPage from "./pages/DeliveryCategoryPage";
+import OTTCategoryPage from "./pages/OTTCategoryPage";
+import EtcCategoryPage from "./pages/EtcCategoryPage";
+import CreateDeliveryPartyPage from "./pages/CreateDeliveryPartyPage";
+import CreateOTTPartyPage from "./pages/CreateOTTPartyPage";
+import CreateETCPartyPage from "./pages/CreateETCPartyPage";
 
 export const GlobalStyle = createGlobalStyle`
   ${reset} 
+ 
   @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
   *,
 	*:before,
 	*:after {
 	  box-sizing: border-box;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   }
   
   body {
@@ -22,7 +31,6 @@ export const GlobalStyle = createGlobalStyle`
 `;
 
 function App() {
-  console.log("ibal");
   return (
     <>
       <GlobalStyle />
@@ -31,6 +39,29 @@ function App() {
         <Route path="/login" component={LoginPage} exact />
         <Route path="/mypage" component={MyPage} exact />
         <Route path="/partymake" component={PartyMakingPage} exact />
+        <Route path="/category/select" component={CategorySelectPage} exact />
+        <Route
+          path="/category/delivery"
+          component={DeliveryCategoryPage}
+          exact
+        />
+        <Route path="/category/ott" component={OTTCategoryPage} exact />
+        <Route path="/category/etc" component={EtcCategoryPage} exact />
+        <Route
+          path="/category/create/delivery"
+          component={CreateDeliveryPartyPage}
+          exact
+        />
+        <Route
+          path="/category/create/ott"
+          component={CreateOTTPartyPage}
+          exact
+        />
+        <Route
+          path="/category/create/etc"
+          component={CreateETCPartyPage}
+          exact
+        />
         <Redirect from="*" to="/" />
       </Switch>
     </>
