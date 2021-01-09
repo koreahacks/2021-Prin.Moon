@@ -7,6 +7,9 @@ const Wrapper = styled.div`
   background-color: white;
   border-radius: 20px;
   min-height: 25vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 `;
 
 export default function ListContainer({ children }) {

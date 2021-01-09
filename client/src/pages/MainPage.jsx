@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import HeaderWrapper from "../components/HeaderWrapper";
 import ListContainer from "../components/ListContainer";
-
+import myAxios from "../utils/myAxios";
 import { EBike2 as BikeIcon } from "@styled-icons/remix-line/EBike2";
 import { Netflix as NetflixIcon } from "@styled-icons/remix-fill/Netflix";
 import { Guitar as GuitarIcon } from "@styled-icons/fa-solid/Guitar";
@@ -12,6 +12,7 @@ import { PersonFill as PersonFillIcon } from "@styled-icons/bootstrap/PersonFill
 import useGeoLocation from "../hooks/useGeoLocation";
 import { useHistory } from "react-router-dom";
 import PotItem from "../components/PotItem";
+import { getTimeTillNow } from "../utils/date";
 
 const Background = styled.div`
   width: 100vw;
@@ -110,7 +111,29 @@ const PositionText = styled.div`
 
 export default function MainPage() {
   const { myLocation } = useGeoLocation();
+  const [nearPotList, setNearPotList] = useState([]);
+  const [recentPotList, setRecentPotList] = useState([]);
   const history = useHistory();
+
+  const getNearByPotList = async () => {
+    const { data } = await myAxios.get(
+      `/pot/near?latitude=${myLocation.lat}&longitude=${myLocation.lng}`
+    );
+    setNearPotList(data);
+  };
+
+  const getRecentPotList = async () => {
+    const { data } = await myAxios.get("/pot/recent");
+    setRecentPotList(data);
+  };
+
+  useEffect(() => {
+    getNearByPotList();
+    getRecentPotList();
+  }, []);
+
+  console.log(nearPotList);
+
   return (
     <>
       <Background>
@@ -153,72 +176,28 @@ export default function MainPage() {
             <ShowMoreInfoBtn>더 보기</ShowMoreInfoBtn>
           </TitleLayOut>
           <ListContainer>
-            <PotItem
-              name={"배달"}
-              title={"김치찌개먹어요"}
-              endTime={"1분전"}
-            ></PotItem>
-            <PotItem
-              name={"배달"}
-              title={"김치찌개먹어요"}
-              endTime={"1분전"}
-            ></PotItem>
-            <PotItem
-              name={"배달"}
-              title={"김치찌개먹어요"}
-              endTime={"1분전"}
-            ></PotItem>
-            <PotItem
-              name={"배달"}
-              title={"김치찌개먹어요"}
-              endTime={"1분전"}
-            ></PotItem>
-            <PotItem
-              name={"배달"}
-              title={"김치찌개먹어요"}
-              endTime={"1분전"}
-            ></PotItem>
+            {nearPotList.map((pot) => (
+              <PotItem
+                id={`near_${pot.id}`}
+                name={pot.category.name}
+                title={pot.title}
+                endTime={pot.endTime ? getTimeTillNow(pot.endTime) : "마감없음"}
+              />
+            ))}
           </ListContainer>
           <TitleLayOut>
             <Title>전체 N빵</Title>
             <ShowMoreInfoBtn>더 보기</ShowMoreInfoBtn>
           </TitleLayOut>
           <ListContainer>
-            <PotItem
-              name={"배달"}
-              title={"김치찌개먹어요"}
-              endTime={"1분전"}
-            ></PotItem>
-            <PotItem
-              name={"배달"}
-              title={"김치찌개먹어요"}
-              endTime={"1분전"}
-            ></PotItem>
-            <PotItem
-              name={"배달"}
-              title={"김치찌개먹어요"}
-              endTime={"1분전"}
-            ></PotItem>
-            <PotItem
-              name={"배달"}
-              title={"김치찌개먹어요"}
-              endTime={"1분전"}
-            ></PotItem>
-            <PotItem
-              name={"배달"}
-              title={"김치찌개먹어요"}
-              endTime={"1분전"}
-            ></PotItem>
-            <PotItem
-              name={"배달"}
-              title={"김치찌개먹어요"}
-              endTime={"1분전"}
-            ></PotItem>
-            <PotItem
-              name={"배달"}
-              title={"김치찌개먹어요"}
-              endTime={"1분전"}
-            ></PotItem>
+            {recentPotList.map((pot) => (
+              <PotItem
+                id={`recent_${pot.id}`}
+                name={pot.category.name}
+                title={pot.title}
+                endTime={pot.endTime ? getTimeTillNow(pot.endTime) : "마감없음"}
+              />
+            ))}
           </ListContainer>
         </ContentWrapper>
         <PlusButtonWrapper>
