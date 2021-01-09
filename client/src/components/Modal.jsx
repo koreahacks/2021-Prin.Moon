@@ -8,20 +8,6 @@ const Align = styled.div`
   display: flex;
   justify-content: center;
 `
-const Header = styled.div`
-  background-color: '#ffae66';
-  height: 30%;
-  width: 100%;
-  font-size : 3vw;
-  font-weight: bold;
-  padding: 3vw;
-  z-index: 9999;
-  display: flex;
-  justify-content: center;
-`
-const Body = styled.div`
-  padding: 2vw;
-`
 
 function getModalStyle() {
   const top = 50;
