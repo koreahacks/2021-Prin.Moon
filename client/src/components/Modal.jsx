@@ -1,14 +1,32 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import Button from "./Button";
+import styled from 'styled-components';
 import Modal from '@material-ui/core/Modal';
+import { getThemeProps } from '@material-ui/styles';
 
-function rand() {
-  return Math.round(Math.random() * 20) - 10;
-}
+const Align = styled.div`
+  display: flex;
+  justify-content: center;
+`
+const Header = styled.div`
+  background-color: '#FF9333',
+  height: 30%;
+`
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#FF9333',
+    },
+    secondary: {
+      main: '#E2E2E2',
+    },
+  },
+});
 
 function getModalStyle() {
-  const top = 50 + rand();
-  const left = 50 + rand();
+  const top = 50;
+  const left = 50;
 
   return {
     top: `${top}%`,
@@ -22,13 +40,12 @@ const useStyles = makeStyles((theme) => ({
     position: 'absolute',
     width: 400,
     backgroundColor: theme.palette.background.paper,
-    border: '2px solid #000',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
   },
 }));
 
-export default function SimpleModal() {
+export default function SimpleModal(props) {
   const classes = useStyles();
   // getModalStyle is not a pure function, we roll the style only on the first render
   const [modalStyle] = React.useState(getModalStyle);
@@ -44,19 +61,27 @@ export default function SimpleModal() {
 
   const body = (
     <div style={modalStyle} className={classes.paper}>
-      <h2 id="simple-modal-title">Text in a modal</h2>
-      <p id="simple-modal-description">
-        Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-      </p>
-      <SimpleModal />
+      <Header>
+        <Align>
+          <h2 id="simple-modal-title">{props.title}</h2>
+        </Align>
+      </Header>
+      <Align>
+        <p id="simple-modal-description">
+          {props.contents}
+        </p>
+      </Align>
+      <Align>
+        {
+          props.buttons.map((button)=>button)
+        }
+      </Align>
     </div>
   );
 
   return (
     <div>
-      <button type="button" onClick={handleOpen}>
-        Open Modal
-      </button>
+      <Button title={props.openButtonTitle} color={props.openButtonColor} onClick = {handleOpen}></Button>
       <Modal
         open={open}
         onClose={handleClose}
