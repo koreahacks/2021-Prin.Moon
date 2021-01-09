@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import LogoImg from "../assets/logo.png";
-import Spinner from "../assets/Spinner.svg";
 import myAxios from "../utils/myAxios";
+import Spinner from "../components/Spinner";
 
 import { KakaoTalk as KakaoTalkIcon } from "@styled-icons/remix-fill/KakaoTalk";
 import env from "../common/const";
@@ -61,20 +61,6 @@ const CustomKakaoIcon = styled(KakaoTalkIcon)`
   margin-right: 5px;
 `;
 
-const StyledLoadingSpinner = styled.div`
-  position: relative;
-  display: flex;
-  min-height: 100vh;
-  padding-top: calc(51px + 1rem);
-  padding-bottom: 150px;
-  justify-content: center;
-  align-items: center;
-
-  img {
-    height: 8rem;
-  }
-`;
-
 export default function LoginPage() {
   const [loading, setLoading] = useState(true);
   const checkUser = async () => {
@@ -93,9 +79,7 @@ export default function LoginPage() {
   return (
     <>
       {loading ? (
-        <StyledLoadingSpinner>
-          <img src={Spinner} alt="loading.." />
-        </StyledLoadingSpinner>
+        <Spinner />
       ) : (
         <Wrapper>
           <Description>세상에 없던 빵!</Description>

@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import ListCard from "../components/ListCard";
 import PageHeader from "../components/PageHeader";
 
 export default function DeliveryCategoryPage() {
   const [location, setLocation] = useState(false);
+  const getDeliveryCategory = async () => {};
+  useEffect(() => {});
   return (
     <Wrapper>
       <PageHeader title={"배달음식"} />
@@ -14,6 +16,7 @@ export default function DeliveryCategoryPage() {
           distance={10}
           title={"123"}
           createAt={"2021-01-09T11:44:35.441Z"}
+          endTime={"2021-01-08T03:30:06.689250"}
         ></ListCard>
         <ListCard
           id={1}
