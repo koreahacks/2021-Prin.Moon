@@ -43,35 +43,67 @@ function App() {
       <Switch>
         <Route path="/" component={Auth(MainPage, false)} exact />
         <Route path="/login" component={LoginPage} exact />
-        <Route path="/mypage" component={MyPage} exact />
-        <Route path="/recruitedParty" component={RecruitedParty} exact />
-        <Route path="/participatedParty" component={ParticipatedParty} exact />
-        <Route path="/partymake" component={PartyMakingPage} exact />
-        <Route path="/category/select" component={CategorySelectPage} exact />
+        <Route path="/mypage" component={Auth(MyPage, false)} exact />
         <Route
-          path="/category/delivery"
-          component={DeliveryCategoryPage}
+          path="/recruitedParty"
+          component={Auth(RecruitedParty, false)}
           exact
         />
-        <Route path="/category/ott" component={OTTCategoryPage} exact />
-        <Route path="/category/etc" component={EtcCategoryPage} exact />
+        <Route
+          path="/participatedParty"
+          component={Auth(ParticipatedParty, false)}
+          exact
+        />
+        <Route
+          path="/partymake"
+          component={Auth(PartyMakingPage, false)}
+          exact
+        />
+        <Route
+          path="/category/select"
+          component={Auth(CategorySelectPage, false)}
+          exact
+        />
+        <Route
+          path="/category/delivery"
+          component={Auth(DeliveryCategoryPage, false)}
+          exact
+        />
+        <Route
+          path="/category/ott"
+          component={Auth(OTTCategoryPage, false)}
+          exact
+        />
+        <Route
+          path="/category/etc"
+          component={Auth(EtcCategoryPage, false)}
+          exact
+        />
         <Route
           path="/category/create/delivery"
-          component={CreateDeliveryPartyPage}
+          component={Auth(CreateDeliveryPartyPage, false)}
           exact
         />
         <Route
           path="/category/create/ott"
-          component={CreateOTTPartyPage}
+          component={Auth(CreateOTTPartyPage, false)}
           exact
         />
         <Route
           path="/category/create/etc"
-          component={CreateETCPartyPage}
+          component={Auth(CreateETCPartyPage, false)}
           exact
         />
-        <Route path="/address/confirm" component={ConfirmAddressPage} exact />
-        <Route path="/address/search" component={AddressSearchPage} exact />
+        <Route
+          path="/address/confirm"
+          component={Auth(ConfirmAddressPage, false)}
+          exact
+        />
+        <Route
+          path="/address/search"
+          component={Auth(AddressSearchPage, false)}
+          exact
+        />
         <Redirect from="*" to="/" />
       </Switch>
     </>
