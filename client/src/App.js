@@ -54,11 +54,6 @@ function App() {
           exact
         />
         <Route
-          path="/partymake"
-          component={Auth(PartyMakingPage, false)}
-          exact
-        />
-        <Route
           path="/category/select"
           component={Auth(CategorySelectPage, false)}
           exact
