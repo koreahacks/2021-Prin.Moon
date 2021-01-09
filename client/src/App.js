@@ -22,8 +22,10 @@ export const GlobalStyle = createGlobalStyle`
 `;
 
 function App() {
+  console.log("ibal");
   return (
     <>
+      <GlobalStyle />
       <Switch>
         <Route path="/" component={MainPage} exact />
         <Route path="/login" component={LoginPage} exact />
