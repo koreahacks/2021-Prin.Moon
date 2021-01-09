@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import LogoImg from "../assets/logo.png";
+import Spinner from "../assets/Spinner.svg";
+import myAxios from "../utils/myAxios";
 
 import { KakaoTalk as KakaoTalkIcon } from "@styled-icons/remix-fill/KakaoTalk";
 import env from "../common/const";
@@ -59,16 +61,52 @@ const CustomKakaoIcon = styled(KakaoTalkIcon)`
   margin-right: 5px;
 `;
 
+const StyledLoadingSpinner = styled.div`
+  position: relative;
+  display: flex;
+  min-height: 100vh;
+  padding-top: calc(51px + 1rem);
+  padding-bottom: 150px;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    height: 8rem;
+  }
+`;
+
 export default function LoginPage() {
+  const [loading, setLoading] = useState(true);
+  const checkUser = async () => {
+    try {
+      const res = await myAxios.get("/user/info");
+      if (res.status === 200) {
+        window.location.href = "/";
+      }
+    } catch (error) {
+      setLoading(false);
+    }
+  };
+  useEffect(() => {
+    checkUser();
+  }, [loading]);
   return (
-    <Wrapper>
-      <Description>세상에 없던 빵!</Description>
-      <Logo src={LogoImg} alt="로고 이미지" />
-      <KaKaoBtn href={`${env.SERVER_BASE_URL}/auth/login`}>
-        <CustomKakaoIcon />
-        카카오톡으로 로그인하기
-      </KaKaoBtn>
-      <MakerNames>2020 KOREA HACKS Prin-Moon</MakerNames>
-    </Wrapper>
+    <>
+      {loading ? (
+        <StyledLoadingSpinner>
+          <img src={Spinner} alt="loading.." />
+        </StyledLoadingSpinner>
+      ) : (
+        <Wrapper>
+          <Description>세상에 없던 빵!</Description>
+          <Logo src={LogoImg} alt="로고 이미지" />
+          <KaKaoBtn href={`${env.SERVER_BASE_URL}/auth/login`}>
+            <CustomKakaoIcon />
+            카카오톡으로 로그인하기
+          </KaKaoBtn>
+          <MakerNames>2020 KOREA HACKS Prin-Moon</MakerNames>
+        </Wrapper>
+      )}
+    </>
   );
 }
