@@ -13,7 +13,7 @@ const Parties = styled.div`
   padding: 5%;
   height: 300vw;
 `;
-export default function RecruitedParty(props) {
+export default function ParticipatedParty(props) {
   const [parties, setParties] = React.useState([]);
   React.useEffect(() => {
     (async () => {
@@ -29,7 +29,7 @@ export default function RecruitedParty(props) {
       <Parties>
       {parties.map((party) => {
           return (
-            <Party place={party.distance} title={party.title} time={party.createdAt} user={party.owner}></Party>
+            <Party category={party.category} isRecruited={false} place={party.distance} title={party.title} time={party.createdAt} user={party.owner}></Party>
           );
         })}
       </Parties>
