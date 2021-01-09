@@ -23,6 +23,14 @@ const Place = styled.div`
     font-size: 10px;
     font-weight: 500;
     padding-bottom: 1%;
+    margin: 1%;
+`
+
+const Memo = styled.div`
+    font-size: 18px;
+    font-weight: 500;
+    padding-bottom: 1%;
+    margin: 1%;
 `
 const Evaluate = styled.div`
     background-color: #ffae66;
@@ -105,6 +113,7 @@ export default function Party(props) {
             <Place>{props.category.name}</Place>
             <Title>{props.title}</Title>
             <Time>{props.time}</Time>
+            {props.isRecruited && <Memo>{props.memo}</Memo>}
         </Info>
         {props.isRecruited || <Modal openButtonTitle = {"신뢰도 평가하기"} openButtonColor={'primary'} title={"왓챠 팟 구함"} buttons={
     [<Button color={"primary"} onClick={handleCredibility}>평가하기</Button>]
