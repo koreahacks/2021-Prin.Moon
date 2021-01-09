@@ -14,7 +14,6 @@ const PartyComp = styled.div`
   border-radius: 20px;
   justify-content: space-between;
   display: flex;
-  flex-direction: column;
   align-items: center;
 `;
 const Place = styled.div`
@@ -112,7 +111,7 @@ export default function Party(props) {
           openButtonColor={"primary"}
           title={"왓챠 팟 구함"}
           buttons={[
-            <Button color={"primary"} onClick={handleCredibility}>
+            <Button color={"primary"} onClick={handleCredibility} width="2rem">
               평가하기
             </Button>,
           ]}
@@ -122,9 +121,10 @@ export default function Party(props) {
               <Bold>{props.user.name} </Bold>님의 신뢰도를 평가해 주세요.
             </Ment>
             <Breads>
-              {breads.map((element) => {
+              {breads.map((element, index) => {
                 return (
                   <BreadMargin
+                    key={index}
                     src={Bread}
                     alt="bread"
                     id={element}

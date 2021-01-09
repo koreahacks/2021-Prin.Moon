@@ -9,6 +9,7 @@ import { useHistory } from "react-router-dom";
 
 const ButtonWrapper = styled.div`
   margin-top: 4vh;
+  height: 20vh;
 `;
 
 export default function CategorySelectPage() {
@@ -23,6 +24,7 @@ export default function CategorySelectPage() {
           <Button
             color="primary"
             width="100%"
+            height="100px"
             onClick={(e) => {
               e.preventDefault();
               history.push("/category/create/delivery");
