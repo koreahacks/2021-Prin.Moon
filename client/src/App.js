@@ -15,6 +15,9 @@ import EtcCategoryPage from "./pages/EtcCategoryPage";
 import CreateDeliveryPartyPage from "./pages/CreateDeliveryPartyPage";
 import CreateOTTPartyPage from "./pages/CreateOTTPartyPage";
 import CreateETCPartyPage from "./pages/CreateETCPartyPage";
+import ConfirmAddressPage from "./pages/ConfirmAddressPage";
+import GeoCoder from "./utils/geocode";
+import AddressSearchPage from "./pages/AddressSearchPage";
 import Auth from "./hoc/Auth";
 
 export const GlobalStyle = createGlobalStyle`
@@ -34,6 +37,7 @@ export const GlobalStyle = createGlobalStyle`
 `;
 
 function App() {
+  console.log(GeoCoder.getLatLngFromAddress("고려대학교"));
   return (
     <>
       <GlobalStyle />
@@ -68,6 +72,8 @@ function App() {
           component={CreateETCPartyPage}
           exact
         />
+        <Route path="/address/confirm" component={ConfirmAddressPage} exact />
+        <Route path="/address/search" component={AddressSearchPage} exact />
         <Redirect from="*" to="/" />
       </Switch>
     </>

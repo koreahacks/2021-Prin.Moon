@@ -26,6 +26,14 @@ const CloseIcon = styled(Close)`
   color: #ac5910;
 `;
 
-export default function TransparentHeader({ type }) {
-  return <Wrapper>{type === "Arrow" ? <ArrowIcon /> : <CloseIcon />}</Wrapper>;
+export default function TransparentHeader({ type, ...props }) {
+  return (
+    <Wrapper>
+      {type === "Arrow" ? (
+        <ArrowIcon onClick={props.onClick} />
+      ) : (
+        <CloseIcon onClick={props.onClick} />
+      )}
+    </Wrapper>
+  );
 }
