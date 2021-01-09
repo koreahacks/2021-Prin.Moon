@@ -1,7 +1,3 @@
-import dotenv from "dotenv";
-
-dotenv.config();
-
 export const ormConfig = {
   type: process.env.TYPEORM_CONNECTION || "mysql",
   host: process.env.TYPEORM_HOST || "localhost",
