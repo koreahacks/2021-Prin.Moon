@@ -31,7 +31,7 @@ export default function RecruitedParty(props) {
       <Parties>
       {parties.map((party) => {
           return (
-            <Party isRecruited={true} place={party.distance} title={party.title} time={party.createdAt} user={party.owner}></Party>
+            <Party category={party.category} memo={party.memo} isRecruited={true} place={party.distance} title={party.title} time={party.createdAt} user={party.owner}></Party>
           );
         })}
       </Parties>
