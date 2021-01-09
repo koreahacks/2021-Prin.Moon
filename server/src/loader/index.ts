@@ -1,12 +1,15 @@
 import express, { Request, Response, NextFunction } from "express";
 import createDBConnection from "./mysql";
 import cors from "cors";
-import path from "path";
 import logger from "morgan";
 import createError from "http-errors";
-import { statusCode, resMessage } from "@util/constant";
+import APIRouter from "./router";
+import dotenv from "dotenv";
+import { statusCode, resMessage } from "../common/constant";
 
 export default async (app: express.Application) => {
+  dotenv.config();
+
   await createDBConnection();
   app.set("port", process.env.SERVER_PORT);
   app.use(logger("dev"));
@@ -20,6 +23,8 @@ export default async (app: express.Application) => {
       credentials: true,
     })
   );
+
+  app.use("/api", APIRouter);
 
   app.use(
     (
