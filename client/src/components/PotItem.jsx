@@ -34,11 +34,7 @@ export default function PotItem({ ...props }) {
   `;
 
   return (
-    <PotItemContainer
-      onClick={() => {
-        console.log(name);
-      }}
-    >
+    <PotItemContainer onClick={() => {}}>
       <PotCategory>{name}</PotCategory>
       <PotTitle>{title}</PotTitle>
       <PotEndTime>{endTime ? endTime : "마감 없음"}</PotEndTime>

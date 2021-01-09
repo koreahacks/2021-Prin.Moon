@@ -18,7 +18,7 @@ export default function RecruitedParty(props) {
   React.useEffect(() => {
     (async () => {
       const { data } = await myAxios.get("/pot/ownered-pots");
-      console.log(data);
+
       if (data) {
         setParties(data);
       }
