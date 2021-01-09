@@ -27,9 +27,17 @@ export default function ParticipatedParty(props) {
     <Body>
       <PageHeader title={"내가 참가한 팟"} />
       <Parties>
-      {parties.map((party) => {
+        {parties.map((party) => {
           return (
-            <Party category={party.category} isRecruited={false} place={party.distance} title={party.title} time={party.createdAt} user={party.owner}></Party>
+            <Party
+              key={party.id}
+              category={party.category}
+              isRecruited={false}
+              place={party.distance}
+              title={party.title}
+              time={party.createdAt}
+              user={party.owner}
+            />
           );
         })}
       </Parties>
