@@ -127,6 +127,15 @@ export default function MainPage() {
     setRecentPotList(data);
   };
 
+  const isHasLocation = (url) => {
+    if (myLocation.place) {
+      history.push(url);
+      return;
+    }
+    alert("위치를 선택해 주셔야 파티를 모집할 수 있습니다!");
+    history.push("/address/search");
+  };
+
   useEffect(() => {
     getNearByPotList();
     getRecentPotList();
@@ -162,41 +171,35 @@ export default function MainPage() {
           </TitleLayOut>
           <CategoryIcons>
             <CategoryIcon>
-              <BikeIcon
-                onClick={() => {
-                  history.push("/category/delivery");
-                }}
-              />
+              <BikeIcon onClick={() => isHasLocation("/category/delivery")} />
             </CategoryIcon>
             <CategoryIcon>
-              <NetflixIcon
-                onClick={() => {
-                  history.push("/category/ott");
-                }}
-              />
+              <NetflixIcon onClick={() => isHasLocation("/category/ott")} />
             </CategoryIcon>
             <CategoryIcon>
-              <GuitarIcon
-                onClick={() => {
-                  history.push("/category/etc");
-                }}
-              />
+              <GuitarIcon onClick={() => isHasLocation("/category/etc")} />
             </CategoryIcon>
           </CategoryIcons>
-          <TitleLayOut>
-            <Title>내 근처 N빵</Title>
-            <ShowMoreInfoBtn>더 보기</ShowMoreInfoBtn>
-          </TitleLayOut>
-          <ListContainer>
-            {nearPotList.map((pot) => (
-              <PotItem
-                id={`near_${pot.id}`}
-                name={pot.category.name}
-                title={pot.title}
-                endTime={pot.endTime ? getTimeTillNow(pot.endTime) : "마감없음"}
-              />
-            ))}
-          </ListContainer>
+          {myLocation.place && (
+            <>
+              <TitleLayOut>
+                <Title>내 근처 N빵</Title>
+                <ShowMoreInfoBtn>더 보기</ShowMoreInfoBtn>
+              </TitleLayOut>
+              <ListContainer>
+                {nearPotList.map((pot) => (
+                  <PotItem
+                    id={`near_${pot.id}`}
+                    name={pot.category.name}
+                    title={pot.title}
+                    endTime={
+                      pot.endTime ? getTimeTillNow(pot.endTime) : "마감없음"
+                    }
+                  />
+                ))}
+              </ListContainer>
+            </>
+          )}
           <TitleLayOut>
             <Title>전체 N빵</Title>
             <ShowMoreInfoBtn>더 보기</ShowMoreInfoBtn>
@@ -213,17 +216,7 @@ export default function MainPage() {
           </ListContainer>
         </ContentWrapper>
         <PlusButtonWrapper>
-          <ButtonContent
-            onClick={() => {
-              if (myLocation.place) {
-                history.push("/category/select");
-                return;
-              }
-
-              alert("위치를 선택해 주셔야 파티를 모집할 수 있습니다!");
-              history.push("/address/search");
-            }}
-          >
+          <ButtonContent onClick={() => isHasLocation("/category/select")}>
             <PlusIcon />
           </ButtonContent>
         </PlusButtonWrapper>
