@@ -31,8 +31,44 @@ PotRouter.get("/near", async (req: Request, res: Response) => {
   }
 });
 
+PotRouter.get("/joined-pots", async (req: Request, res: Response) => {
+  if (!req.user)
+    return res
+      .status(statusCode.UNAUTHORIZED)
+      .json(new JsonResponse(false, resMessage.X_UNAUTHORIZED("user")));
+  const potList = await PotService.getUserJoinedPot(req.user.id);
+
+  res.json(potList);
+});
+
+PotRouter.get("/ownered-pots", async (req: Request, res: Response) => {
+  if (!req.user)
+    return res
+      .status(statusCode.UNAUTHORIZED)
+      .json(new JsonResponse(false, resMessage.X_UNAUTHORIZED("user")));
+  const potList = await PotService.getUserOwnedPot(req.user.id);
+
+  res.json(potList);
+});
+
 PotRouter.get(
-  "/:categoryId",
+  "/:potId",
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { potId } = req.params;
+    try {
+      const potInfo = await PotService.getPotById(Number(potId));
+
+      res.json(potInfo);
+    } catch (e) {
+      return res
+        .status(statusCode.DB_ERROR)
+        .json(new JsonResponse(false, resMessage.DB_ERROR));
+    }
+  }
+);
+
+PotRouter.get(
+  "/category/:categoryId",
   async (req: Request, res: Response, next: NextFunction) => {
     const { categoryId } = req.params;
     try {
