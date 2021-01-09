@@ -43,7 +43,7 @@ export default function ListCard(props) {
 }
 
 const StyledListWrapper = styled.div`
-  width: 90%;
+  width: 90vw;
   box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
   background-color: #ffffff;
   border-radius: 20px;

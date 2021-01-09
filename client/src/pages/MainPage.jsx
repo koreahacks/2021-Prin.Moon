@@ -125,7 +125,11 @@ export default function MainPage() {
                 ? `내 위치 : ${myLocation.place}`
                 : "위치를 설정해주세요"}
             </PositionText>
-            <PersonIcon />
+            <PersonIcon
+              onClick={() => {
+                history.push("/mypage");
+              }}
+            />
           </MainPageHeaderContent>
         </HeaderWrapper>
         <ContentWrapper>
