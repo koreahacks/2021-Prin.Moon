@@ -70,7 +70,7 @@ export default function SimpleModal(props) {
             {props.children}
         </Align>
       </div>
-      <Align>
+      <Align onClick={handleClose}>
         { 
           props.buttons.map((button)=>button)
         }
