@@ -201,7 +201,17 @@ export default function MainPage() {
           </ListContainer>
         </ContentWrapper>
         <PlusButtonWrapper>
-          <ButtonContent>
+          <ButtonContent
+            onClick={() => {
+              if (myLocation.place) {
+                history.push("/category/select");
+                return;
+              }
+
+              alert("위치를 선택해 주셔야 파티를 모집할 수 있습니다!");
+              history.push("/address/search");
+            }}
+          >
             <PlusIcon />
           </ButtonContent>
         </PlusButtonWrapper>
