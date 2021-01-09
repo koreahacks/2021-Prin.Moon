@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-
+import { useHistory } from "react-router-dom";
 import { ArrowBack } from "@styled-icons/boxicons-regular/ArrowBack";
 import { Close } from "@styled-icons/ionicons-outline/Close";
 
@@ -27,12 +27,21 @@ const CloseIcon = styled(Close)`
 `;
 
 export default function TransparentHeader({ type, ...props }) {
+  const history = useHistory();
   return (
     <Wrapper>
       {type === "Arrow" ? (
-        <ArrowIcon onClick={props.onClick} />
+        <ArrowIcon
+          onClick={() => {
+            history.goBack();
+          }}
+        />
       ) : (
-        <CloseIcon onClick={props.onClick} />
+        <CloseIcon
+          onClick={() => {
+            history.goBack();
+          }}
+        />
       )}
     </Wrapper>
   );

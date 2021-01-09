@@ -12,12 +12,27 @@ export default function DeliveryCategoryPage() {
   const [error, setError] = useState(false);
   const [location, setLocation] = useState(false);
   const [deliveryList, setDeliveryList] = useState([]);
+
+  const calculateTime = (time) => {
+    if (!time) return false;
+    const temp = parseInt(
+      (new Date().getTime() - new Date(time).getTime()) / (1000 * 60)
+    ).toString();
+    return temp <= 0 ? true : false;
+  };
+
   const getDeliveryCategory = async () => {
     try {
       const { data } = await myAxios.get(
         `/pot/near/1?latitude=${myLocation.lat}&longitude=${myLocation.lng}`
       );
-      setDeliveryList(data);
+      if (location) {
+        const noEndTimeData = data.filter((item) => !item.endTime);
+        const endTimeData = data.filter((item) => calculateTime(item.endTime));
+        setDeliveryList([...endTimeData, ...noEndTimeData]);
+      } else {
+        setDeliveryList(data);
+      }
     } catch (error) {
       setError(true);
     }
@@ -31,14 +46,19 @@ export default function DeliveryCategoryPage() {
   return (
     <Wrapper>
       <PageHeader title={"배달음식"} />
+      <StyledFilter
+        onClick={() => {
+          setLocation(!location);
+        }}
+      >
+        {location ? "거리순으로 정렬하기" : "마감순으로 정렬하기"}
+      </StyledFilter>
       <StyledListWrapper>
         {loading ? (
           <Spinner />
         ) : error ? (
           <ListCard
             title={"정보를 불러오는데 실패했습니다. 새로고침 해주세요."}
-            createAt={"2021-01-09T11:44:35.441Z"}
-            endTime={"2021-01-08T03:30:06.689250"}
           />
         ) : (
           deliveryList.map((delivery) => (
@@ -62,13 +82,22 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100vw;
-  height: auto;
+  height: 100vh;
+  overflow: auto;
   background-color: rgba(255, 174, 103, 0.15);
 `;
 
 const StyledListWrapper = styled.div`
-  padding: 1rem;
   display: flex;
   flex-direction: column;
+  align-items: center;
+`;
+
+const StyledFilter = styled.div`
+  padding: 0.3rem;
+  width: 100%;
+  color: grey;
+  display: flex;
+  justify-content: flex-end;
   align-items: center;
 `;
