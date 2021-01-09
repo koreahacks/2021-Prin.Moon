@@ -11,6 +11,9 @@ import Collapse from '@material-ui/core/Collapse';
 import SvgIcon from '@material-ui/core/SvgIcon';
 import Bread from '../assets/bread2.jpg';
 import Header from "../components/Header";
+import {Link} from 'react-router-dom';
+import RecruitedParty from "./RecruitedParty";
+import ParticipatedParty from "./ParticipatedParty";
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
@@ -110,6 +113,16 @@ const BreadMargin = styled.img`
 const BorderList = styled.div`
   border: 5px solid;
 `
+
+const StyledLink = styled(Link)`
+    text-decoration: none;
+    color: black;
+
+    &:focus, &:hover, &:visited, &:link, &:active {
+        text-decoration: none;
+    }
+`;
+
 export default function MyPage(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
@@ -144,18 +157,24 @@ export default function MyPage(props) {
       </div>
       </Body>
       <List className={classes.listRoot}>
-      <ListItem button>
-      <ListItemAvatar>
-          <HomeIcon color="primary" style={{ color: '#ff7800' }} />
-        </ListItemAvatar>
-        <ListItemText primary="내가 모집한 팟" />
-      </ListItem>
+      <StyledLink to = "RecruitedParty">
+        <ListItem button>
+        <ListItemAvatar>
+            <HomeIcon color="primary" style={{ color: '#ff7800' }} />
+          </ListItemAvatar>
+          
+            <ListItemText primary="내가 모집한 팟" style={{ textDecoration: 'none'}}/>
+          
+        </ListItem>
+      </StyledLink> 
+      <StyledLink to = "ParticipatedParty">
       <ListItem button>
         <ListItemAvatar>
         <HomeIcon color="primary" style={{ color: '#ac5910' }} />
         </ListItemAvatar>
         <ListItemText primary="내가 참가한 팟"/>
       </ListItem>
+      </StyledLink>
       <ListItem button>
       <ListItemAvatar>
           <HomeIcon color="disabled" />

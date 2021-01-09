@@ -5,6 +5,8 @@ import reset from "styled-reset";
 import MainPage from "./pages/MainPage";
 import LoginPage from "./pages/LoginPage";
 import MyPage from "./pages/MyPage";
+import RecruitedParty from "./pages/RecruitedParty";
+import ParticipatedParty from "./pages/ParticipatedParty";
 import PartyMakingPage from "./pages/PartyMakingPage";
 import CategorySelectPage from "./pages/CategorySelectPage";
 import DeliveryCategoryPage from "./pages/DeliveryCategoryPage";
@@ -38,6 +40,9 @@ function App() {
         <Route path="/" component={MainPage} exact />
         <Route path="/login" component={LoginPage} exact />
         <Route path="/mypage" component={MyPage} exact />
+        <Route path="/login" component={LoginPage} exact />
+        <Route path="/recruitedParty" component={RecruitedParty} exact />
+        <Route path="/participatedParty" component={ParticipatedParty} exact />
         <Route path="/partymake" component={PartyMakingPage} exact />
         <Route path="/category/select" component={CategorySelectPage} exact />
         <Route

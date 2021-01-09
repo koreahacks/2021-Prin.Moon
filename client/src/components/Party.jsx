@@ -101,7 +101,7 @@ export default function Party(props) {
             <Time>{props.time}</Time>
         </Info>
         <Modal openButtonTitle = {"신뢰도 평가하기"} openButtonColor={'primary'} title={"왓챠 팟 구함"} buttons={
-    [<Button title={"평가하기"} color={"primary"}></Button>]
+    [<Button color={"primary"}>평가하기</Button>]
   }>
       <Wrapper>
       <Ment>
