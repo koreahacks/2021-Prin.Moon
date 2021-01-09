@@ -2,11 +2,38 @@ import { getRepository } from "typeorm";
 import { resMessage, statusCode } from "../common/constant";
 import JsonResponse from "../common/types/json-response";
 import PotEntity from "../entity/pot.entity";
+import UserJoinPotEntity from "../entity/user-join-pot.entity";
 import sortPotsByLocation from "../lib/sort-pot-by-location";
 import PotDTO from "./dto/pot.dto";
 import UpdatePotRequest from "./dto/update-pot-request.dto";
 
 const PotService = {
+  getUserJoinedPot: async (userId: number) => {
+    const userJoinPotReository = getRepository(UserJoinPotEntity);
+    const potList = await userJoinPotReository.find({
+      where: { userId },
+    });
+
+    return potList;
+  },
+
+  getUserOwnedPot: async (userId: number) => {
+    const potRepository = getRepository(PotEntity);
+    const potList = await potRepository.find({ where: { ownerId: userId } });
+
+    return potList;
+  },
+
+  getPotById: async (potId: number) => {
+    const potRepository = getRepository(PotEntity);
+    const potInfo = await potRepository.findOne({
+      relations: ["owner", "userJoinPot"],
+      where: { id: potId },
+    });
+
+    return potInfo;
+  },
+
   getRecentPots: async () => {
     const potRepository = getRepository(PotEntity);
     const potList = await potRepository.find({
