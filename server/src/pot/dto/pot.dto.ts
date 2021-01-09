@@ -13,7 +13,7 @@ export default class PotDTO {
 
   constructor(body: any) {
     this.title = body.title;
-    this.endTime = body.endtime ? body.endTime : null;
+    this.endTime = body.endTime ? body.endTime : null;
     this.latitude = body.latitude ? body.latitude : null;
     this.longitude = body.longitude ? body.longitude : null;
     this.appLink = body.appLink ? body.appLink : null;
