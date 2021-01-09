@@ -9,6 +9,7 @@ export default function PotItem({ ...props }) {
     align-items: space-between;
     justify-content: space-between;
     padding: 0.5rem 0.1rem;
+    margin: 0.3rem 0.1rem;
   `;
 
   const PotCategory = styled.div`
@@ -22,19 +23,20 @@ export default function PotItem({ ...props }) {
   const PotTitle = styled.div`
     flex: 1 50px;
     padding: 3px 0px;
+    font-size: large;
     padding-left: 13px;
   `;
   const PotEndTime = styled.div`
-    flex: 0 45px;
-    padding: 3px 0px;
-
+    flex: 0 70px;
+    padding: 3px 1px;
+    text-align: right;
     color: red;
   `;
 
   return (
     <PotItemContainer
       onClick={() => {
-        console.log("모달!");
+        console.log(name);
       }}
     >
       <PotCategory>{name}</PotCategory>

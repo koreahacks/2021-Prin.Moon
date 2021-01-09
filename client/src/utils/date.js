@@ -1,3 +1,10 @@
+const date = {
+  getCurrentDate: () =>
+    new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000)
+      .toJSON()
+      .slice(0, 19),
+};
+
 export const getTimeTillNow = (time) => {
   const Time = {
     MILLISECONDS_PER_SECOND: 1000,
@@ -36,3 +43,5 @@ export const getTimeTillNow = (time) => {
 
   return parseInt(yearsTillNow.toString()).toString() + "년";
 };
+
+export default date;
