@@ -52,6 +52,9 @@ export default class PotEntity {
   @Column({ type: "int" })
   categoryId!: number;
 
+  @Column({ type: "int", default: 0 })
+  joinedPeople!: number;
+
   @Column({ type: "int", nullable: true })
   totalPeople?: number;
 

@@ -5,6 +5,7 @@ import Modal from "../components/Modal";
 import Button from "../components/Button";
 import Paper from '@material-ui/core/Paper';
 import Bread from '../assets/bread2.jpg';
+import myAxios from "../utils/myAxios";
 
 const PartyComp = styled.div`
   background:white;
@@ -93,19 +94,22 @@ export default function Party(props) {
           }
       }
   }
+  const handleCredibility = async () => {
+    await myAxios.put(`/credibility/${props.owner.id}`, count);
+  }
   return (
     <PartyComp>
         <Info>
-            <Place>{props.place}</Place>
+            <Place>{Math.floor(props.place)}m</Place>
             <Title>{props.title}</Title>
             <Time>{props.time}</Time>
         </Info>
         <Modal openButtonTitle = {"신뢰도 평가하기"} openButtonColor={'primary'} title={"왓챠 팟 구함"} buttons={
-    [<Button color={"primary"}>평가하기</Button>]
+    [<Button color={"primary"} onClick={handleCredibility}>평가하기</Button>]
   }>
       <Wrapper>
       <Ment>
-            <Bold>이경연 </Bold>님의 신뢰도를 평가해 주세요. 
+            <Bold>{props.owner.name} </Bold>님의 신뢰도를 평가해 주세요. 
             </Ment>
                 <Breads>
                 {

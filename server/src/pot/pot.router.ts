@@ -55,10 +55,19 @@ PotRouter.get(
   "/:potId",
   async (req: Request, res: Response, next: NextFunction) => {
     const { potId } = req.params;
+    const { latitude, longitude } = req.query;
+    if (!latitude || !longitude)
+      return res
+        .status(statusCode.BAD_REQUEST)
+        .json(new JsonResponse(false, resMessage.NO_X("User location")));
     try {
-      const potInfo = await PotService.getPotById(Number(potId));
+      const { code, json } = await PotService.getPotById(
+        Number(potId),
+        Number(latitude),
+        Number(longitude)
+      );
 
-      res.json(potInfo);
+      res.status(code).json(json);
     } catch (e) {
       return res
         .status(statusCode.DB_ERROR)
@@ -103,7 +112,13 @@ PotRouter.get("/near/:categoryId", async (req: Request, res: Response) => {
 
 PotRouter.post("/", async (req: Request, res: Response, next: NextFunction) => {
   const potDTO = new PotDTO(req.body);
-  const { code, json } = await PotService.createPot(potDTO);
+  const userId = req.user?.id;
+  if (!userId)
+    return res
+      .status(statusCode.UNAUTHORIZED)
+      .json(new JsonResponse(false, resMessage.X_UNAUTHORIZED("user")));
+
+  const { code, json } = await PotService.createPot(userId, potDTO);
   res.status(code).json(json);
 });
 

@@ -1,8 +1,9 @@
 import axios from "axios";
+import env from "../common/const";
 
-const serverURL = "http://localhost:4000";
+const serverURL = env.SERVER_BASE_URL;
 
-const URL = `${serverURL}/api`;
+const URL = `${serverURL}`;
 
 const myAxios = {
   get: async (path) => {
