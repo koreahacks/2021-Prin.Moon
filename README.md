@@ -15,7 +15,7 @@
 ### Front-End
 
 | Spec | <img width= 50 src="https://user-images.githubusercontent.com/63051473/104110741-e66d1e80-531d-11eb-8024-e138a1003cd7.png"> | <img width= 50 src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1566557331/noticon/d5hqar2idkoefh6fjtpu.png"> | <img width= 50 src="https://user-images.githubusercontent.com/63051473/104110747-f127b380-531d-11eb-801e-e97233b5acfb.png"> | <img width= 50 src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1568851518/noticon/lwj3hr9v1yoheimtwc1w.png"> | 
-| :--: | :--: | :--: | :--: |
+| :--: | :--: | :--: | :--: | :--: |
 | **Description** | JavaScript | React | Recoil | Styled-Components |
 
 </br>
@@ -30,7 +30,7 @@
 
 ### Infrastructure
 | Spec |   <img width= 50 src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1566798146/noticon/lku5cppzh8r7awwsmmko.png"> | <img width= 50 src="https://cdn-images-1.medium.com/max/1200/1*r5KdIfHXaz7UQM4FmZ0D5A.png">| <img width= 50 src="https://user-images.githubusercontent.com/63051473/104110734-d2c1b800-531d-11eb-88bb-68d718f02653.png">| <img width= 50 src="https://user-images.githubusercontent.com/63051473/104110736-dce3b680-531d-11eb-9431-564813d0dad3.png">|
-| :--: | :--: | :--: |
+| :--: | :--: | :--: | :--: | :--: |
 | **Description** | Nginx | NCP | Docker | Jenkins |
 ## DevOps
 <img src="https://user-images.githubusercontent.com/63051473/101992417-6d66b100-3cf6-11eb-8df9-ef7f65e90bf3.png"/>
