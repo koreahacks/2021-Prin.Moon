@@ -15,7 +15,7 @@
 ### Front-End
 
 | Spec | <img width= 50 src="https://user-images.githubusercontent.com/63051473/104110741-e66d1e80-531d-11eb-8024-e138a1003cd7.png"> | <img width= 50 src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1566557331/noticon/d5hqar2idkoefh6fjtpu.png"> | <img width= 50 src="https://user-images.githubusercontent.com/63051473/104110747-f127b380-531d-11eb-801e-e97233b5acfb.png"> | <img width= 50 src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1568851518/noticon/lwj3hr9v1yoheimtwc1w.png"> | 
-| :--: | :--: | :--: | :--: | :--: | :--: | :--: |
+| :--: | :--: | :--: | :--: |
 | **Description** | JavaScript | React | Recoil | Styled-Components |
 
 </br>
