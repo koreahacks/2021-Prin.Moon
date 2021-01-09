@@ -40,16 +40,6 @@ export default function CategorySelectPage() {
           >
             OTT
           </Button>
-          <Button
-            color="primary"
-            width="100%"
-            onClick={(e) => {
-              e.preventDefault();
-              history.push("/category/create/etc");
-            }}
-          >
-            기타
-          </Button>
         </ButtonWrapper>
       </Grid>
     </Background>
