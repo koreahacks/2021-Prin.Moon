@@ -10,6 +10,7 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Collapse from '@material-ui/core/Collapse';
 import SvgIcon from '@material-ui/core/SvgIcon';
 import Bread from '../assets/bread2.jpg';
+import Header from "../components/Header";
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
@@ -37,18 +38,6 @@ function HomeIcon(props) {
     </SvgIcon>
   );
 }
-
-const Header = styled.div`
-  background-color: white;
-  height: 50%;
-  width: 100%;
-  font-size : 5vw;
-  font-weight: bold;
-  padding: 5vw;
-  display: flex;
-  justify-content: center;
-  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
-`
 
 const AvatarAlign = styled.div`
   padding-top: 10vw;
@@ -131,9 +120,7 @@ export default function MyPage(props) {
 
   return (
     <Fragment>
-      <Header>
-        나의 N빵
-      </Header>
+      <Header title={"나의 N빵"}></Header>
       <Body>
       <AvatarAlign>
         <BadgeAvatar name = "김호랑"/>
