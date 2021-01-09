@@ -43,7 +43,6 @@ export default function useMakePots() {
       categoryId: 1,
     });
   };
-
   const postDeliveryPot = useCallback(
     async (endTime, latitude, longitude) => {
       const modifiedDeliveryJSONForm = {
