@@ -15,7 +15,7 @@ import { Link } from "react-router-dom";
 import RecruitedParty from "./RecruitedParty";
 import ParticipatedParty from "./ParticipatedParty";
 import LoginPage from "./LoginPage";
-import myAxios from '../utils/myAxios';
+import myAxios from "../utils/myAxios";
 import env from "../common/const";
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -131,16 +131,16 @@ const StyledLink = styled(Link)`
 `;
 
 const LogoutA = styled.a`
-text-decoration: none;
-color: black;
-`
+  text-decoration: none;
+  color: black;
+`;
 
 export default function MyPage(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const [info, setUserInfo] = React.useState({});
   const [isLogin, setIsLogin] = React.useState(true);
-  const breads = [1,2,3,4,5];
+  const breads = [1, 2, 3, 4, 5];
   React.useEffect(() => {
     (async () => {
       const { data } = await myAxios.get("/user/info");
@@ -153,54 +153,62 @@ export default function MyPage(props) {
     setOpen(!open);
   };
   const getOpacity = (id) => {
-    if(info.credibility < id){
-        return {
-            opacity: 0.15,
-        }
-    } 
-  }
-  
+    if (info.credibility < id) {
+      return {
+        opacity: 0.15,
+      };
+    }
+  };
+
   const getCredibilityMent = () => {
-    if(info.credibility <= 1){
-      return "신뢰도가 부족해요 ㅠ.ㅠ 더 힘내주실거죠?"
+    if (info.credibility <= 1) {
+      return "신뢰도가 부족해요 ㅠ.ㅠ 더 힘내주실거죠?";
+    } else if (info.credibility <= 2) {
+      return "중간까지 얼마안남았어요!! 좀더 화이팅!";
+    } else if (info.credibility <= 3) {
+      return "3점이나 되다니?! 5점까지 조금만 더 달려용~~ ";
+    } else if (info.credibility <= 4) {
+      return "1점밖에 안남았어요!! 고지가 눈앞에!! ㅎ ";
+    } else {
+      return "엄청난 신뢰를 받고 있는 당신!";
     }
-    else if(info.credibility <= 2){
-      return "중간까지 얼마안남았어요!! 좀더 화이팅!"
-    }
-    else if(info.credibility <= 3){
-      return "3점이나 되다니?! 5점까지 조금만 더 달려용~~ "
-    }
-    else if(info.credibility <= 4){
-      return "1점밖에 안남았어요!! 고지가 눈앞에!! ㅎ "
-    }
-    else {
-      return "엄청난 신뢰를 받고 있는 당신!"
-    }
-  }
+  };
   return (
     <Fragment>
       <PageHeader title={"나의 N빵"} type={"mypage"} />
       <Body>
-      <AvatarAlign>
-        <BadgeAvatar name = {info.name}/>
-        <Info>
-          <Name><Bold>{info.name}</Bold>님, </Name>
-          <Ment>지금까지 <Money>{info.savedMoney}</Money>원을 아끼셨어요!</Ment>
-        </Info>
-      </AvatarAlign>
-      <Assurance><AssuranceBold>{info.name}</AssuranceBold>님의 신뢰도</Assurance>
-      <div className={classes.root}>
-        <Paper elevation={2}>
-          <Breads>
-          {
-                    breads.map((element) => {
-                        return <BreadMargin src={Bread} alt="bread" id={element} style = {getOpacity(element)}  onClick={handleClick}/>
-                    })
-          }
-          </Breads> 
-        </Paper>
-        <MentAssurance>{getCredibilityMent()}</MentAssurance> 
-      </div>
+        <AvatarAlign>
+          <BadgeAvatar name={info.name} />
+          <Info>
+            <Name>
+              <Bold>{info.name}</Bold>님,{" "}
+            </Name>
+            <Ment>
+              지금까지 <Money>{info.savedMoney}</Money>원을 아끼셨어요!
+            </Ment>
+          </Info>
+        </AvatarAlign>
+        <Assurance>
+          <AssuranceBold>{info.name}</AssuranceBold>님의 신뢰도
+        </Assurance>
+        <div className={classes.root}>
+          <Paper elevation={2}>
+            <Breads>
+              {breads.map((element) => {
+                return (
+                  <BreadMargin
+                    src={Bread}
+                    alt="bread"
+                    id={element}
+                    style={getOpacity(element)}
+                    onClick={handleClick}
+                  />
+                );
+              })}
+            </Breads>
+          </Paper>
+          <MentAssurance>{getCredibilityMent()}</MentAssurance>
+        </div>
       </Body>
       <List className={classes.listRoot}>
         <StyledLink to="RecruitedParty">
@@ -214,24 +222,27 @@ export default function MyPage(props) {
               style={{ textDecoration: "none" }}
             />
           </ListItem>
-        </StyledLink> 
-      <StyledLink to = "ParticipatedParty">
-      <ListItem button>
-        <ListItemAvatar>
-        <HomeIcon color="primary" style={{ color: '#ac5910' }} />
-        </ListItemAvatar>
-        <ListItemText primary="내가 참가한 팟"/>
-      </ListItem>
-      </StyledLink>
-      <ListItem button>
-      <ListItemAvatar>
-          <HomeIcon color="disabled" />
-        </ListItemAvatar>
-        <LogoutA href = {`${env.SERVER_BASE_URL}/user/logout`}>
-          <ListItemText primary="로그아웃" style={{ textDecoration: 'none'}}/>
-        </LogoutA>
-       </ListItem>   
-    </List>
+        </StyledLink>
+        <StyledLink to="ParticipatedParty">
+          <ListItem button>
+            <ListItemAvatar>
+              <HomeIcon color="primary" style={{ color: "#ac5910" }} />
+            </ListItemAvatar>
+            <ListItemText primary="내가 참가한 팟" />
+          </ListItem>
+        </StyledLink>
+        <ListItem button>
+          <ListItemAvatar>
+            <HomeIcon color="disabled" />
+          </ListItemAvatar>
+          <LogoutA href={`${env.SERVER_BASE_URL}/user/logout`}>
+            <ListItemText
+              primary="로그아웃"
+              style={{ textDecoration: "none" }}
+            />
+          </LogoutA>
+        </ListItem>
+      </List>
     </Fragment>
   );
 }
