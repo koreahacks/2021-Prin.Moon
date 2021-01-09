@@ -31,7 +31,7 @@ const UserJoinPotService = {
       };
     }
   },
-  updateUserJoinPot: async (userId: number | undefined, potId: number) => {
+  confirmUserJoinPot: async (userId: number | undefined, potId: number) => {
     try {
       const userJoinPotRepository = getRepository(UserJoinPotEntity);
       const targetUserJoinPot = await userJoinPotRepository.findOne({
@@ -58,6 +58,17 @@ const UserJoinPotService = {
         json: new JsonResponse(false, error.message),
       };
     }
+  },
+  finishEvaluation: async (userId: number, potId: number) => {
+    const userJoinPotRepository = getRepository(UserJoinPotEntity);
+    const target = await userJoinPotRepository.findOne({
+      where: { userId, potId },
+    });
+    if (!target) return;
+    const updatedUserJoinPot = userJoinPotRepository.merge(target, {
+      isEvaluated: true,
+    });
+    await userJoinPotRepository.save(updatedUserJoinPot);
   },
   deleteUserJoinPot: async (userId: number | undefined, potId: number) => {
     try {

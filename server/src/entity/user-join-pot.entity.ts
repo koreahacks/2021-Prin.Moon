@@ -13,6 +13,9 @@ export default class UserJoinPotEntity {
   @Column({ type: "boolean", default: true })
   onGoing!: boolean;
 
+  @Column({ type: "boolean", default: false })
+  isEvaluated!: boolean;
+
   @ManyToOne(() => UserEntity, (user) => user.userJoinPot, {
     onUpdate: "CASCADE",
   })

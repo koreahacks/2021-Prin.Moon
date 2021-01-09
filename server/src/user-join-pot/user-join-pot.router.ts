@@ -27,7 +27,7 @@ UserJoinPotRouter.put(
   async (req: Request, res: Response) => {
     const userId = req.user?.id;
     const { potId } = req.params;
-    const { code, json } = await UserJoinPotService.updateUserJoinPot(
+    const { code, json } = await UserJoinPotService.confirmUserJoinPot(
       userId,
       Number(potId)
     );
