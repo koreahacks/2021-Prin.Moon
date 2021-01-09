@@ -9,6 +9,8 @@ import { Guitar as GuitarIcon } from "@styled-icons/fa-solid/Guitar";
 import { Plus as PlusIcon } from "@styled-icons/boxicons-regular/Plus";
 import { BellFill as BellFillIcon } from "@styled-icons/bootstrap/BellFill";
 import { PersonFill as PersonFillIcon } from "@styled-icons/bootstrap/PersonFill";
+import useGeoLocation from "../hooks/useGeoLocation";
+import { useHistory } from "react-router-dom";
 
 const Background = styled.div`
   width: 100vw;
@@ -106,14 +108,23 @@ const PositionText = styled.div`
 `;
 
 export default function MainPage() {
-  const dummyPosition = "고려대 3번출구";
+  const { myLocation } = useGeoLocation();
+  const history = useHistory();
   return (
     <>
       <Background>
         <HeaderWrapper>
           <MainPageHeaderContent>
             <BellIcon />
-            <PositionText>{`내 위치 : ${dummyPosition}`}</PositionText>
+            <PositionText
+              onClick={() => {
+                history.push("/address/search");
+              }}
+            >
+              {myLocation.place
+                ? `내 위치 : ${myLocation.place}`
+                : "위치를 설정해주세요"}
+            </PositionText>
             <PersonIcon />
           </MainPageHeaderContent>
         </HeaderWrapper>
