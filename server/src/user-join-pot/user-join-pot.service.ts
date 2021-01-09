@@ -4,6 +4,15 @@ import { resMessage, statusCode } from "../common/constant";
 import JsonResponse from "../common/types/json-response";
 
 const UserJoinPotService = {
+  getUserJoinPot: async (userId: number, potId: number) => {
+    const userJoinPotRepository = getRepository(UserJoinPotEntity);
+    const userJoinPot = await userJoinPotRepository.findOne({
+      where: { userId, potId },
+    });
+    if (!userJoinPot) return false;
+    return userJoinPot.onGoing;
+  },
+
   createUserJoinPot: async (userId: number | undefined, potId: number) => {
     try {
       const userJoinPotRepository = getRepository(UserJoinPotEntity);
@@ -36,7 +45,7 @@ const UserJoinPotService = {
       }
       const updatedTargetUserJoinPot = userJoinPotRepository.merge(
         targetUserJoinPot,
-        { onGoing: false }
+        { onGoing: true }
       );
       await userJoinPotRepository.save(updatedTargetUserJoinPot);
       return {

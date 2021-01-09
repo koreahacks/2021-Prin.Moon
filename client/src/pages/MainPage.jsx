@@ -138,6 +138,8 @@ export default function MainPage() {
 
   useEffect(() => {
     getNearByPotList();
+  }, [myLocation]);
+  useEffect(() => {
     getRecentPotList();
   }, []);
 
@@ -186,15 +188,7 @@ export default function MainPage() {
               </TitleLayOut>
               <ListContainer>
                 {nearPotList.map((pot) => (
-                  <PotItem
-                    key={pot.id}
-                    id={`near_${pot.id}`}
-                    name={pot.category.name}
-                    title={pot.title}
-                    endTime={
-                      pot.endTime ? getTimeTillNow(pot.endTime) : "마감없음"
-                    }
-                  />
+                  <PotItem key={`near_${pot.id}`} pot={pot} />
                 ))}
               </ListContainer>
             </>
@@ -205,13 +199,7 @@ export default function MainPage() {
           </TitleLayOut>
           <ListContainer>
             {recentPotList.map((pot) => (
-              <PotItem
-                key={pot.id}
-                id={`recent_${pot.id}`}
-                name={pot.category.name}
-                title={pot.title}
-                endTime={pot.endTime ? getTimeTillNow(pot.endTime) : "마감없음"}
-              />
+              <PotItem key={`recent_${pot.id}`} pot={pot} />
             ))}
           </ListContainer>
         </ContentWrapper>
