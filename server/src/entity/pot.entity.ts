@@ -19,20 +19,23 @@ export default class PotEntity {
   @CreateDateColumn()
   createAt!: Date;
 
-  @Column({ type: "date" })
-  endTime!: Date;
-
   @Column({ type: "varchar" })
+  title!: string;
+
+  @Column({ type: "date", nullable: true })
+  endTime?: Date;
+
+  @Column({ type: "varchar", nullable: true })
   location?: string;
 
-  @Column({ type: "varchar" })
+  @Column({ type: "varchar", nullable: true })
   appLink?: string;
 
   @Column({ type: "varchar" })
   kakaoLink!: string;
 
-  @Column({ type: "varchar" })
-  memo!: string;
+  @Column({ type: "varchar", nullable: true })
+  memo?: string;
 
   @Column({ type: "int" })
   fee!: number;
@@ -46,7 +49,7 @@ export default class PotEntity {
   @Column({ type: "int" })
   categoryId!: number;
 
-  @Column({ type: "int" })
+  @Column({ type: "int", nullable: true })
   totalPeople?: number;
 
   @OneToMany(() => UserJoinPotEntity, (userJoinPot) => userJoinPot.pot, {
