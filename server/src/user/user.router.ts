@@ -31,7 +31,7 @@ UserRouter.put("/saved-money", async (req: Request, res: Response) => {
 
 UserRouter.get("/logout", (req: Request, res: Response) => {
   const frontURL =
-    process.env.NODE_ENV === "development"
+    process.env.NODE_ENV === "dev"
       ? (process.env.CLIENT_URI_DEV as string)
       : (process.env.CLIENT_URI_PRODUCTION as string);
 
