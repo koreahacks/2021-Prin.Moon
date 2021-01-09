@@ -25,7 +25,10 @@ AuthRouter.get("/callback/kakao", async (req: Request, res: Response) => {
   const jwtToken = AuthService.generateToken(user.id, user.name);
 
   res.cookie("Authorization", jwtToken);
-  const clientURI = process.env.CLIENT_URI as string;
+  const clientURI =
+    process.env.NODE_ENV === "dev"
+      ? (process.env.CLIENT_URI_DEV as string)
+      : (process.env.CLIENT_URI_PRODUCTION as string);
   res.redirect(clientURI);
 });
 
