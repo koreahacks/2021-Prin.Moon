@@ -24,10 +24,18 @@ export default function ParticipatedParty(props) {
       }
     })();
   }, []);
+
+  if(parties.length === 0) return (
+    <Body>
+      <PageHeader title={"내가 참가한 팟"} />
+      파티가 없습니다 ㅠ.ㅠ 
+    </Body>
+  )
   return (
     <Body>
       <PageHeader title={"내가 참가한 팟"} />
       <Parties>
+        
         {parties.map((party) => {
           return (
             <Party

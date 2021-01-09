@@ -25,6 +25,12 @@ export default function RecruitedParty(props) {
     })();
   }, []);
 
+  if(parties.length === 0) return (
+    <Body>
+      <PageHeader title={"내가 모집한 팟"} />
+      파티가 없습니다 ㅠ.ㅠ 
+    </Body>
+  )
   return (
     <Body>
       <PageHeader title={"내가 모집한 팟"} />
@@ -34,6 +40,7 @@ export default function RecruitedParty(props) {
             <Party
               key={party.id}
               isRecruited={true}
+              category={party.category}
               place={party.distance}
               title={party.title}
               time={party.createdAt}
