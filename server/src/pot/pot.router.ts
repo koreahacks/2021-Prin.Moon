@@ -112,7 +112,13 @@ PotRouter.get("/near/:categoryId", async (req: Request, res: Response) => {
 
 PotRouter.post("/", async (req: Request, res: Response, next: NextFunction) => {
   const potDTO = new PotDTO(req.body);
-  const { code, json } = await PotService.createPot(potDTO);
+  const userId = req.user?.id;
+  if (!userId)
+    return res
+      .status(statusCode.UNAUTHORIZED)
+      .json(new JsonResponse(false, resMessage.X_UNAUTHORIZED("user")));
+
+  const { code, json } = await PotService.createPot(userId, potDTO);
   res.status(code).json(json);
 });
 

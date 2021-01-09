@@ -11,6 +11,7 @@ import { BellFill as BellFillIcon } from "@styled-icons/bootstrap/BellFill";
 import { PersonFill as PersonFillIcon } from "@styled-icons/bootstrap/PersonFill";
 import useGeoLocation from "../hooks/useGeoLocation";
 import { useHistory } from "react-router-dom";
+import PotItem from "../components/PotItem";
 
 const Background = styled.div`
   width: 100vw;
@@ -152,24 +153,72 @@ export default function MainPage() {
             <ShowMoreInfoBtn>더 보기</ShowMoreInfoBtn>
           </TitleLayOut>
           <ListContainer>
-            <div>ㅋㅋ</div>
-            <div>ㅋㅋ</div>
-            <div>ㅋㅋ</div>
-            <div>ㅋㅋ</div>
-            <div>ㅋㅋ</div>
+            <PotItem
+              name={"배달"}
+              title={"김치찌개먹어요"}
+              endTime={"1분전"}
+            ></PotItem>
+            <PotItem
+              name={"배달"}
+              title={"김치찌개먹어요"}
+              endTime={"1분전"}
+            ></PotItem>
+            <PotItem
+              name={"배달"}
+              title={"김치찌개먹어요"}
+              endTime={"1분전"}
+            ></PotItem>
+            <PotItem
+              name={"배달"}
+              title={"김치찌개먹어요"}
+              endTime={"1분전"}
+            ></PotItem>
+            <PotItem
+              name={"배달"}
+              title={"김치찌개먹어요"}
+              endTime={"1분전"}
+            ></PotItem>
           </ListContainer>
           <TitleLayOut>
             <Title>전체 N빵</Title>
             <ShowMoreInfoBtn>더 보기</ShowMoreInfoBtn>
           </TitleLayOut>
           <ListContainer>
-            <div>ㅋㅋ</div>
-            <div>ㅋㅋ</div>
-            <div>ㅋㅋ</div>
-            <div>ㅋㅋ</div>
-            <div>ㅋㅋ</div>
-            <div>ㅋㅋ</div>
-            <div>ㅋㅋ</div>
+            <PotItem
+              name={"배달"}
+              title={"김치찌개먹어요"}
+              endTime={"1분전"}
+            ></PotItem>
+            <PotItem
+              name={"배달"}
+              title={"김치찌개먹어요"}
+              endTime={"1분전"}
+            ></PotItem>
+            <PotItem
+              name={"배달"}
+              title={"김치찌개먹어요"}
+              endTime={"1분전"}
+            ></PotItem>
+            <PotItem
+              name={"배달"}
+              title={"김치찌개먹어요"}
+              endTime={"1분전"}
+            ></PotItem>
+            <PotItem
+              name={"배달"}
+              title={"김치찌개먹어요"}
+              endTime={"1분전"}
+            ></PotItem>
+            <PotItem
+              name={"배달"}
+              title={"김치찌개먹어요"}
+              endTime={"1분전"}
+            ></PotItem>
+            <PotItem
+              name={"배달"}
+              title={"김치찌개먹어요"}
+              endTime={"1분전"}
+            ></PotItem>
           </ListContainer>
         </ContentWrapper>
         <PlusButtonWrapper>

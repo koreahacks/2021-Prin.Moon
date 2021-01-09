@@ -107,10 +107,10 @@ const PotService = {
     return sortedPotList;
   },
 
-  createPot: async (pot: PotDTO) => {
+  createPot: async (userId: number, pot: PotDTO) => {
     try {
       const potRepository = getRepository(PotEntity);
-      const newPot = potRepository.create(pot);
+      const newPot = potRepository.create({ ...pot, ownerId: userId });
       await potRepository.save(newPot);
       return {
         code: statusCode.CREATED,

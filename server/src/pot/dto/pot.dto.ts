@@ -7,7 +7,6 @@ export default class PotDTO {
   kakaoLink!: string;
   memo?: string;
   fee!: number;
-  ownerId!: number;
   categoryId!: number;
   totalPeople?: number;
 
@@ -20,7 +19,6 @@ export default class PotDTO {
     this.kakaoLink = body.kakaoLink;
     this.memo = body.memo ? body.memo : null;
     this.fee = body.fee;
-    this.ownerId = body.ownerId;
     this.categoryId = body.categoryId;
     this.totalPeople = body.totalPeople ? body.totalPeople : null;
   }
