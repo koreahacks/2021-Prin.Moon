@@ -7,13 +7,11 @@ UserRouter.get("/info", (req: Request, res: Response) => {
   return res.json({ success: true, user: req.user });
 });
 
-UserRouter.put("/credibility", async (req: Request, res: Response) => {
-  const id = req.user?.id;
-  const name = req.user?.name;
+UserRouter.put("/credibility/:userId", async (req: Request, res: Response) => {
+  const { userId } = req.params;
   const credibility = req.body.credibility;
   const { code, json } = await UserService.updateUserCredibility(
-    id,
-    name,
+    Number(userId),
     credibility
   );
   res.status(code).json(json);
