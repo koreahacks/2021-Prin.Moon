@@ -8,9 +8,6 @@ export default class UserEntity {
   id!: number;
 
   @Column({ type: "varchar" })
-  email!: string;
-
-  @Column({ type: "varchar" })
   name!: string;
 
   @Column({ type: "int", default: 0 })
