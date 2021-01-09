@@ -140,7 +140,6 @@ export default function MyPage(props) {
   React.useEffect(() => {
     (async () => {
       const { data } = await myAxios.get("/user/info");
-      console.log(data.user);
       if (data) {
         setUserInfo(data.user);
       }
