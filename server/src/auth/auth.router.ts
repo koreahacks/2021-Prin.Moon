@@ -3,7 +3,6 @@ import AuthService from "./auth.service";
 import { kakaoOAuthConfig } from "../config/kakao-oauth";
 import KakaoUserInfo from "../common/types/kakao";
 import UserService from "../user/user.service";
-import KakaoToUserDTO from "../user/dto/user.dto";
 
 const AuthRouter = express.Router();
 
