@@ -3,32 +3,33 @@ import { makeStyles, createMuiTheme, ThemeProvider } from '@material-ui/core/sty
 import Button from "./Button";
 import styled from 'styled-components';
 import Modal from '@material-ui/core/Modal';
-import { getThemeProps } from '@material-ui/styles';
 
 const Align = styled.div`
   display: flex;
   justify-content: center;
 `
 const Header = styled.div`
-  background-color: '#FF9333',
+  background-color: '#ffae66';
   height: 30%;
+  width: 100%;
+  font-size : 3vw;
+  font-weight: bold;
+  padding: 3vw;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
 `
-const theme = createMuiTheme({
-  palette: {
-    primary: {
-      main: '#FF9333',
-    },
-    secondary: {
-      main: '#E2E2E2',
-    },
-  },
-});
+const Body = styled.div`
+  padding: 2vw;
+`
 
 function getModalStyle() {
   const top = 50;
   const left = 50;
 
   return {
+    border: 0,
+    borderRadius: 15,
     top: `${top}%`,
     left: `${left}%`,
     transform: `translate(-${top}%, -${left}%)`,
@@ -38,11 +39,23 @@ function getModalStyle() {
 const useStyles = makeStyles((theme) => ({
   paper: {
     position: 'absolute',
-    width: 400,
-    backgroundColor: theme.palette.background.paper,
+    width: 300,
+    backgroundColor: 'white',
     boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
+    padding: theme.spacing(0, 0, 0),
+    outline: 'none',
   },
+  header: {
+    borderTopLeftRadius: 15,
+    borderTopRightRadius: 15,
+    display: "block",
+    backgroundColor: '#ffae66',
+    width: 300,
+    padding: theme.spacing(2, 4, 2),
+  },
+  body: {
+    padding: theme.spacing(1, 3, 1),
+  }
 }));
 
 export default function SimpleModal(props) {
@@ -61,16 +74,16 @@ export default function SimpleModal(props) {
 
   const body = (
     <div style={modalStyle} className={classes.paper}>
-      <Header>
+      <div className={classes.header}>
         <Align>
-          <h2 id="simple-modal-title">{props.title}</h2>
+          {props.title}
         </Align>
-      </Header>
-      <Align>
-        <p id="simple-modal-description">
-          {props.contents}
-        </p>
-      </Align>
+      </div>
+      <div className={classes.body}>
+        <Align>
+            {props.contents}
+        </Align>
+      </div>
       <Align>
         {
           props.buttons.map((button)=>button)
@@ -85,8 +98,6 @@ export default function SimpleModal(props) {
       <Modal
         open={open}
         onClose={handleClose}
-        aria-labelledby="simple-modal-title"
-        aria-describedby="simple-modal-description"
       >
         {body}
       </Modal>
