@@ -29,4 +29,13 @@ UserRouter.put("/saved-money", async (req: Request, res: Response) => {
   res.status(code).json(json);
 });
 
+UserRouter.get("/logout", (req: Request, res: Response) => {
+  const frontURL =
+    process.env.NODE_ENV === "development"
+      ? (process.env.CLIENT_URI_DEV as string)
+      : (process.env.CLIENT_URI_PRODUCTION as string);
+
+  res.clearCookie("Authorization").redirect(frontURL);
+});
+
 export default UserRouter;
