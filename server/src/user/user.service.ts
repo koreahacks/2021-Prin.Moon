@@ -20,9 +20,9 @@ const UserService = {
     const user = await userRepository.findOne({ where: { id, name } });
     return user;
   },
-  updateUserCredentials: async (
-    id: number,
-    name: string,
+  updateUserCredibility: async (
+    id: number | undefined,
+    name: string | undefined,
     credibility: number
   ) => {
     try {
@@ -39,10 +39,15 @@ const UserService = {
         assesmentCount: prevAssesmentCount,
       } = targetUser;
 
-      const nextCredibility = +(
-        (prevCredibility + credibility) /
-        prevAssesmentCount
-      ).toFixed(1);
+      let nextCredibility;
+      if (prevAssesmentCount !== 0) {
+        nextCredibility = +(
+          (prevCredibility + credibility) /
+          prevAssesmentCount
+        ).toFixed(1);
+      } else {
+        nextCredibility = credibility;
+      }
 
       const updatedUser = userRepository.merge(targetUser, {
         credibility: nextCredibility,
@@ -60,7 +65,11 @@ const UserService = {
       };
     }
   },
-  updateUserSavedMoney: async (id: number, name: string, money: number) => {
+  updateUserSavedMoney: async (
+    id: number | undefined,
+    name: string | undefined,
+    money: number
+  ) => {
     try {
       const userRepository = getRepository(UserEntity);
       const targetUser = await userRepository.findOne({ where: { id, name } });
