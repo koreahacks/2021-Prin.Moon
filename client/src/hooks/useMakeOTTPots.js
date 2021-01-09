@@ -29,7 +29,6 @@ export default function useMakeOTTPots() {
   const resetOTTForm = () => {
     setOTTForm({
       title: "",
-
       kakaoLink: "",
       memo: "",
       totalPeople: "",
