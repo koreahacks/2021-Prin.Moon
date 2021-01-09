@@ -9,10 +9,13 @@ import UpdatePotRequest from "./dto/update-pot-request.dto";
 
 const PotService = {
   getUserJoinedPot: async (userId: number) => {
-    const userJoinPotReository = getRepository(UserJoinPotEntity);
-    const potList = await userJoinPotReository.find({
-      where: { userId },
-    });
+    const potRepository = getRepository(PotEntity);
+    const potList = await potRepository
+      .createQueryBuilder("Pot")
+      .leftJoin("Pot.userJoinPot", "UserJoinPot")
+      .innerJoinAndSelect("Pot.category", "Category")
+      .where("UserJoinPot.userId = :userId", { userId })
+      .getMany();
 
     return potList;
   },
