@@ -3,7 +3,6 @@ import styled from "styled-components";
 import Background from "../components/Background";
 import Grid from "../components/Grid";
 import Input from "../components/Input";
-import TextArea from "../components/TextArea";
 import Title from "../components/Title";
 import TransparentHeader from "../components/TransparentHeader";
 import Button from "../components/Button";

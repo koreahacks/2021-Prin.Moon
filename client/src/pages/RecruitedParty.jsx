@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import styled from "styled-components";
 import PageHeader from "../components/PageHeader";
 import Party from "../components/Party";
@@ -50,6 +50,7 @@ export default function RecruitedParty(props) {
     return (
       <Body>
         <PageHeader title={"내가 모집한 팟"} />
+        파티가 없습니다 ㅠ.ㅠ
         <Middle>
           <MoveToCreate
             onClick={() => {

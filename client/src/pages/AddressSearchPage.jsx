@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Grid from "../components/Grid";
-import Input from "../components/Input";
 import Title from "../components/Title";
 import TransparentHeader from "../components/TransparentHeader";
 import useGeoLocation from "../hooks/useGeoLocation";

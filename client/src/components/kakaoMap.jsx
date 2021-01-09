@@ -27,7 +27,7 @@ function KakaoMap({ lat, lng }) {
         // 마커가 지도 위에 표시되도록 설정합니다
         markers.map((marker) => marker.setMap(map));
       });
-  }, [lat, lng, kakao]);
+  }, [lat, lng]);
 
   return (
     <div style={{ height: innerHeight / 3 }}>
