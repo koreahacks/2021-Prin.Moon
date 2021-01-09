@@ -22,7 +22,7 @@ AuthRouter.get("/callback/kakao", async (req: Request, res: Response) => {
     accessToken
   )) as KakaoUserInfo;
   const user = await UserService.getOrCreateUser(userInfo);
-  const jwtToken = AuthService.generateToken(user.id);
+  const jwtToken = AuthService.generateToken(user.id, user.name);
 
   res.cookie("Authorization", jwtToken);
   const clientURI = process.env.CLIENT_URI as string;

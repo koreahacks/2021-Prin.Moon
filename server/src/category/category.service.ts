@@ -1,5 +1,6 @@
 import { getRepository } from "typeorm";
 import { statusCode, resMessage } from "../common/constant";
+import JsonResponse from "../common/types/json-response";
 import CategoryEntity from "../entity/category.entity";
 
 const CategoryService = {
@@ -23,7 +24,7 @@ const CategoryService = {
 
     return {
       code: statusCode.OK,
-      json: { success: true, message: resMessage.X_CREATE_SUCCESS },
+      json: new JsonResponse(true, resMessage.X_CREATE_SUCCESS("category")),
     };
   },
 };
