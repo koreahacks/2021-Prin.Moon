@@ -3,7 +3,7 @@ import * as qs from "querystring";
 import { kakaoOAuthConfig } from "../config/kakao-oauth";
 import jwt from "jsonwebtoken";
 import { jwtConfig } from "../config/jwt";
-
+import DecodedUserInfo from "../common/types/decoded-userInfo";
 const { clientId, redirectURL } = kakaoOAuthConfig;
 
 const AuthService = {
@@ -33,9 +33,9 @@ const AuthService = {
     });
     return data;
   },
-  generateToken: (userId: number) => {
+  generateToken: (userId: number, name: string) => {
     const { tokenSecret, tokenExpiresIn } = jwtConfig;
-    const token = jwt.sign({ userId }, tokenSecret, {
+    const token = jwt.sign({ userId, name }, tokenSecret, {
       expiresIn: tokenExpiresIn,
     });
 
@@ -43,7 +43,7 @@ const AuthService = {
   },
   verifyToken: (token: string) => {
     const decodedToken = jwt.verify(token, jwtConfig.tokenSecret);
-    return decodedToken;
+    return decodedToken as DecodedUserInfo;
   },
 };
 

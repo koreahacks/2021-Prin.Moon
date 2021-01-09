@@ -13,6 +13,11 @@ const UserService = {
     }
     return user;
   },
+  getDecodedUser: async (id: number, name: string) => {
+    const userRepository = getRepository(UserEntity);
+    const user = await userRepository.findOne({ where: { id, name } });
+    return user;
+  },
 };
 
 export default UserService;

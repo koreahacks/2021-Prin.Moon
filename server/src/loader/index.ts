@@ -5,6 +5,7 @@ import logger from "morgan";
 import createError from "http-errors";
 import APIRouter from "./router";
 import dotenv from "dotenv";
+import cookieParser from "cookie-parser";
 import { statusCode, resMessage } from "../common/constant";
 
 export default async (app: express.Application) => {
@@ -14,6 +15,7 @@ export default async (app: express.Application) => {
   app.set("port", process.env.SERVER_PORT);
   app.use(logger("dev"));
   app.use(express.json());
+  app.use(cookieParser());
   app.use(
     cors({
       origin:
