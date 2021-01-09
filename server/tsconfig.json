@@ -65,7 +65,18 @@
 
     /* Advanced Options */
     "skipLibCheck": true /* Skip type checking of declaration files. */,
-    "forceConsistentCasingInFileNames": true /* Disallow inconsistently-cased references to the same file. */
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": ".",
+    "paths": {
+      "*": ["node_modules/*", "@types/*"],
+      "custom-module-type": ["@types/*"],
+      "@controller/*": ["src/controller/*"],
+      "@service/*": ["src/service/*"],
+      "@middleware/*": ["src/middleware/*"],
+      "@util/*": ["src/util/*"],
+      "@entity/*": ["src/entity/*"],
+      "@loader/*": ["src/loader/*"],
+    }
   },
   "include": ["src/**/*.ts"]
 }
