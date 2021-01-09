@@ -47,6 +47,7 @@ const KaKaoBtn = styled.a`
   font-size: 14px;
   font-weight: bold;
   text-align: center;
+  text-decoration: none;
   cursor: pointer;
   &:hover {
     box-shadow: 0 0px 15px 0 rgba(0, 0, 0, 0.2);
