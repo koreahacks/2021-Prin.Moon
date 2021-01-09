@@ -11,6 +11,7 @@ const PotService = {
   getUserJoinedPot: async (userId: number) => {
     const userJoinPotReository = getRepository(UserJoinPotEntity);
     const potList = await userJoinPotReository.find({
+      relations: ["category"],
       where: { userId },
     });
 
@@ -19,7 +20,10 @@ const PotService = {
 
   getUserOwnedPot: async (userId: number) => {
     const potRepository = getRepository(PotEntity);
-    const potList = await potRepository.find({ where: { ownerId: userId } });
+    const potList = await potRepository.find({
+      relations: ["category"],
+      where: { ownerId: userId },
+    });
 
     return potList;
   },
@@ -27,7 +31,7 @@ const PotService = {
   getPotById: async (potId: number, latitude: number, longitude: number) => {
     const potRepository = getRepository(PotEntity);
     const potInfo = await potRepository.findOne({
-      relations: ["owner", "userJoinPot"],
+      relations: ["owner", "userJoinPot", "category"],
       where: { id: potId },
     });
 
@@ -59,7 +63,7 @@ const PotService = {
   getRecentPots: async () => {
     const potRepository = getRepository(PotEntity);
     const potList = await potRepository.find({
-      relations: ["owner"],
+      relations: ["owner", "category"],
       take: 7,
       where: { isOpened: true },
     });
@@ -70,7 +74,7 @@ const PotService = {
   getPotsByCategory: async (categoryId: number) => {
     const potRepository = getRepository(PotEntity);
     const potList = await potRepository.find({
-      relations: ["owner"],
+      relations: ["owner", "category"],
       where: { categoryId, isOpened: true },
     });
 
@@ -80,7 +84,7 @@ const PotService = {
   getPotsNearBy: async (latitude: number, longitude: number) => {
     const potRepository = getRepository(PotEntity);
     const potList = await potRepository.find({
-      relations: ["owner"],
+      relations: ["owner", "category"],
       where: { isOpened: true },
     });
     const sortedPotList = sortPotsByLocation(potList, latitude, longitude);
@@ -95,7 +99,7 @@ const PotService = {
   ) => {
     const potRepository = getRepository(PotEntity);
     const potList = await potRepository.find({
-      relations: ["owner"],
+      relations: ["owner", "category"],
       where: { categoryId, isOpened: true },
     });
     const sortedPotList = sortPotsByLocation(potList, latitude, longitude);
@@ -119,6 +123,25 @@ const PotService = {
       };
     }
   },
+  updateJoinedPeople: async (potId: number) => {
+    const potRepository = getRepository(PotEntity);
+    const targetPot = await potRepository.findOne({ where: { id: potId } });
+    if (!targetPot)
+      return {
+        code: statusCode.BAD_REQUEST,
+        json: new JsonResponse(false, resMessage.NO_X("Pot")),
+      };
+    const updatedJoinedPeople = targetPot.joinedPeople + 1;
+    const updatedPot = potRepository.merge(targetPot, {
+      joinedPeople: updatedJoinedPeople,
+    });
+    await potRepository.save(updatedPot);
+    return {
+      code: statusCode.OK,
+      json: new JsonResponse(true, resMessage.X_UPDATE_SUCCESS("pot")),
+    };
+  },
+
   updatePotInfo: async (potId: number, pot: UpdatePotRequest) => {
     try {
       const potRepository = getRepository(PotEntity);
