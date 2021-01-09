@@ -1,4 +1,5 @@
 import express, { NextFunction, Request, Response } from "express";
+import PotDTO from "./dto/pot.dto";
 import PotService from "./pot.service";
 
 const PotRouter = express.Router();
@@ -20,5 +21,11 @@ PotRouter.get(
     }
   }
 );
+
+PotRouter.post("/", async (req: Request, res: Response, next: NextFunction) => {
+  const potDTO = new PotDTO(req.body);
+  const { code, json } = await PotService.createPot(potDTO);
+  res.status(code).json(json);
+});
 
 export default PotRouter;
