@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Background from "../components/Background";
 import Grid from "../components/Grid";
@@ -8,8 +8,15 @@ import TextArea from "../components/TextArea";
 import Title from "../components/Title";
 import TransparentHeader from "../components/TransparentHeader";
 import Button from "../components/Button";
-import TextField from '@material-ui/core/TextField';
-import { createMuiTheme, ThemeProvider, makeStyles} from '@material-ui/core/styles';
+import TextField from "@material-ui/core/TextField";
+import {
+  createMuiTheme,
+  ThemeProvider,
+  makeStyles,
+} from "@material-ui/core/styles";
+import useMakePots from "../hooks/useMakePots";
+import useGeoLocation from "../hooks/useGeoLocation";
+import date from "../utils/date";
 
 const theme = createMuiTheme({
   palette: {
@@ -36,37 +43,44 @@ const MarginedSubTitle = styled(SubTitle)`
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexWrap: 'wrap',
-    backgroundColor: 'white',
-    borderRadius: '20px',
-    height: '15vw',
-    color: '#502600',
-    textDecoration: 'none',
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    flexWrap: "wrap",
+    backgroundColor: "white",
+    borderRadius: "20px",
+    height: "15vw",
+    color: "#502600",
+    textDecoration: "none",
   },
   textField: {
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
     width: 250,
-    color: '#502600',
-    textDecoration: 'none',
+    color: "#502600",
+    textDecoration: "none",
   },
 }));
 
 export default function CreateDeliveryPartyPage() {
   const classes = useStyles();
-
+  const { deliveryForm, setDeliveryForm, postDeliveryPot } = useMakePots();
+  const { myLocation } = useGeoLocation();
+  const [endTime, setEndTime] = useState(date.getCurrentDate());
   return (
     <>
       <Background>
         <TransparentHeader type="Arrow" />
         <Grid>
           <Title>배달음식</Title>
-          <MarginedInput placeholder="제목" />
-          <MarginedSubTitle>팟 위치</MarginedSubTitle>
-          <MarginedInput placeholder="현 위치" />
+          <MarginedInput
+            placeholder="제목"
+            value={deliveryForm.title}
+            onChange={(e) => {
+              setDeliveryForm({ ...deliveryForm, title: e.target.value });
+            }}
+          />
+
           <MarginedSubTitle>언제까지 팟을 구하실 건가요?</MarginedSubTitle>
 
           <ThemeProvider theme={theme}>
@@ -74,7 +88,10 @@ export default function CreateDeliveryPartyPage() {
               <TextField
                 id="datetime-local"
                 type="datetime-local"
-                defaultValue="2020-01-10T10:30"
+                defaultValue={endTime}
+                onChange={(e) => {
+                  setEndTime(e.target.value);
+                }}
                 className={classes.textField}
                 InputLabelProps={{
                   shrink: true,
@@ -82,14 +99,49 @@ export default function CreateDeliveryPartyPage() {
               />
             </form>
           </ThemeProvider>
-          <MarginedInput placeholder="앱 링크" />
-          <MarginedInput placeholder="배달 팁" />
-          <MarginedInput placeholder="오픈카톡방 링크" />
-          <MarginedTextArea placeholder="메모(선택)" />
+          <MarginedInput
+            placeholder="앱 링크"
+            value={deliveryForm.appLink}
+            onChange={(e) => {
+              setDeliveryForm({ ...deliveryForm, appLink: e.target.value });
+            }}
+          />
+          <MarginedInput
+            placeholder="배달 팁"
+            value={deliveryForm.fee}
+            onChange={(e) => {
+              setDeliveryForm({ ...deliveryForm, fee: e.target.value });
+            }}
+          />
+          <MarginedInput
+            placeholder="오픈카톡방 링크"
+            value={deliveryForm.kakaoLink}
+            onChange={(e) => {
+              setDeliveryForm({ ...deliveryForm, kakaoLink: e.target.value });
+            }}
+          />
+          <MarginedTextArea
+            placeholder="메모(선택)"
+            value={deliveryForm.memo}
+            onChange={(e) => {
+              setDeliveryForm({ ...deliveryForm, memo: e.target.value });
+            }}
+          />
           <Button
             color="primary"
-            onClick={() => {
+            onClick={async (e) => {
+              e.preventDefault();
               if (window.confirm("게시글을 올리시겠어요?")) {
+                try {
+                  await postDeliveryPot(
+                    endTime,
+                    myLocation.lat,
+                    myLocation.lng
+                  );
+                  alert("파티 모집글을 올렸습니다!");
+                } catch (e) {
+                  alert("파티 모집글 에러!");
+                }
               }
             }}
           >
