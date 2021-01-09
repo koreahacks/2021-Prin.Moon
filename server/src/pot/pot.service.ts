@@ -8,7 +8,7 @@ import UpdatePotRequest from "./dto/update-pot-request.dto";
 const PotService = {
   getRecentPots: async () => {
     const potRepository = getRepository(PotEntity);
-    const potList = await potRepository.find({ relations: ["User"], take: 7 });
+    const potList = await potRepository.find({ relations: ["owner"], take: 7 });
 
     return potList;
   },
@@ -16,7 +16,7 @@ const PotService = {
   getPotsByCategory: async (categoryId: number) => {
     const potRepository = getRepository(PotEntity);
     const potList = await potRepository.find({
-      relations: ["Category", "User"],
+      relations: ["category", "owner"],
       where: { categoryId },
     });
 
