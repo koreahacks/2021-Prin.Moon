@@ -67,7 +67,7 @@ const Breads = styled.div`
   display: flex;
   padding-top: 5%;
   padding-bottom: 5%;
-  align-contents: center;
+  justify-content: center;
 `;
 const BreadMargin = styled.img`
   margin: 0 2.5%;
