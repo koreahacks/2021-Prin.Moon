@@ -3,6 +3,7 @@ import { resMessage, statusCode } from "../common/constant";
 import JsonResponse from "../common/types/json-response";
 import PotEntity from "../entity/pot.entity";
 import PotDTO from "./dto/pot.dto";
+import UpdatePotRequest from "./dto/update-pot-request.dto";
 
 const PotService = {
   getRecentPots: async () => {
@@ -31,6 +32,28 @@ const PotService = {
         json: newPot,
       };
     } catch (e) {
+      return {
+        code: statusCode.DB_ERROR,
+        json: new JsonResponse(false, resMessage.DB_ERROR),
+      };
+    }
+  },
+  updatePot: async (potId: number, pot: UpdatePotRequest) => {
+    try {
+      const potRepository = getRepository(PotEntity);
+      const targetPot = await potRepository.findOne({ where: { id: potId } });
+      if (!targetPot)
+        return {
+          code: statusCode.BAD_REQUEST,
+          json: new JsonResponse(false, resMessage.NO_X("Pot")),
+        };
+      const updatedPot = potRepository.merge(targetPot, pot);
+      await potRepository.save(updatedPot);
+      return {
+        code: statusCode.OK,
+        json: updatedPot,
+      };
+    } catch {
       return {
         code: statusCode.DB_ERROR,
         json: new JsonResponse(false, resMessage.DB_ERROR),
