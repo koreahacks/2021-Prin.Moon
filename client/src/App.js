@@ -15,6 +15,7 @@ import EtcCategoryPage from "./pages/EtcCategoryPage";
 import CreateDeliveryPartyPage from "./pages/CreateDeliveryPartyPage";
 import CreateOTTPartyPage from "./pages/CreateOTTPartyPage";
 import CreateETCPartyPage from "./pages/CreateETCPartyPage";
+import Auth from "./hoc/Auth";
 
 export const GlobalStyle = createGlobalStyle`
   ${reset} 
@@ -37,7 +38,7 @@ function App() {
     <>
       <GlobalStyle />
       <Switch>
-        <Route path="/" component={MainPage} exact />
+        <Route path="/" component={Auth(MainPage, true)} exact />
         <Route path="/login" component={LoginPage} exact />
         <Route path="/mypage" component={MyPage} exact />
         <Route path="/login" component={LoginPage} exact />
