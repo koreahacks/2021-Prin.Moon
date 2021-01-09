@@ -14,6 +14,7 @@ const PotService = {
       .createQueryBuilder("Pot")
       .leftJoin("Pot.userJoinPot", "UserJoinPot")
       .innerJoinAndSelect("Pot.category", "Category")
+      .innerJoinAndSelect("Pot.owner", "User")
       .where("UserJoinPot.userId = :userId", { userId })
       .getMany();
 
