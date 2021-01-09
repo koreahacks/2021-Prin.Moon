@@ -9,8 +9,6 @@ const GeoCoder = {
       }
       const places = new kakao.maps.services.Places();
       places.keywordSearch(address, function (result, status) {
-        console.log(result);
-        // 정상적으로 검색이 완료됐으면
         if (status === kakao.maps.services.Status.OK) {
           return resolve(result);
         }
