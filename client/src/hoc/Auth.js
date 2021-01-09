@@ -16,7 +16,7 @@ export default function Auth(Component, loginRequired) {
             history.push("/login");
           }
           if (res.status === 200 && !loginRequired) {
-            history.push("/");
+            history.replace(window.location.pathname);
           }
           setLoading(false);
         } catch (err) {
