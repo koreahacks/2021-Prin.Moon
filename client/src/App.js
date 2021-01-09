@@ -9,11 +9,13 @@ import PartyMakingPage from "./pages/PartyMakingPage";
 
 export const GlobalStyle = createGlobalStyle`
   ${reset} 
+ 
   @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
   *,
 	*:before,
 	*:after {
 	  box-sizing: border-box;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   }
   
   body {
