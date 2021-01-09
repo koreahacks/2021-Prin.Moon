@@ -95,21 +95,23 @@ export default function Party(props) {
       }
   }
   const handleCredibility = async () => {
-    await myAxios.put(`/credibility/${props.owner.id}`, count);
+      console.log(count);
+    await myAxios.put(`/user/credibility/${props.user.id}`, {credibility:count});
+    alert("평가완료!");
   }
   return (
     <PartyComp>
         <Info>
-            <Place>{Math.floor(props.place)}m</Place>
+            <Place>{props.category.name}</Place>
             <Title>{props.title}</Title>
             <Time>{props.time}</Time>
         </Info>
-        <Modal openButtonTitle = {"신뢰도 평가하기"} openButtonColor={'primary'} title={"왓챠 팟 구함"} buttons={
+        {props.isRecruited || <Modal openButtonTitle = {"신뢰도 평가하기"} openButtonColor={'primary'} title={"왓챠 팟 구함"} buttons={
     [<Button color={"primary"} onClick={handleCredibility}>평가하기</Button>]
   }>
       <Wrapper>
       <Ment>
-            <Bold>{props.owner.name} </Bold>님의 신뢰도를 평가해 주세요. 
+            <Bold>{props.user.name} </Bold>님의 신뢰도를 평가해 주세요. 
             </Ment>
                 <Breads>
                 {
@@ -119,7 +121,7 @@ export default function Party(props) {
                 }
                 </Breads>   
       </Wrapper> 
-        </Modal>
+        </Modal>}
     </PartyComp>
   );
 }
