@@ -16,6 +16,9 @@ export default class UserEntity {
   @Column({ type: "int", default: 0 })
   savedMoney!: number;
 
+  @Column({ type: "int", default: 0 })
+  assesmentCount!: number;
+
   @OneToMany(() => PotEntity, (pot) => pot.owner, { cascade: true })
   pot?: PotEntity[];
 
