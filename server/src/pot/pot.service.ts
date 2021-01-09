@@ -11,7 +11,6 @@ const PotService = {
   getUserJoinedPot: async (userId: number) => {
     const userJoinPotReository = getRepository(UserJoinPotEntity);
     const potList = await userJoinPotReository.find({
-      relations: ["category"],
       where: { userId },
     });
 
