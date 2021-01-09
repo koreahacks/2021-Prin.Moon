@@ -10,6 +10,9 @@ import CategorySelectPage from "./pages/CategorySelectPage";
 import DeliveryCategoryPage from "./pages/DeliveryCategoryPage";
 import OTTCategoryPage from "./pages/OTTCategoryPage";
 import EtcCategoryPage from "./pages/EtcCategoryPage";
+import CreateDeliveryPartyPage from "./pages/CreateDeliveryPartyPage";
+import CreateOTTPartyPage from "./pages/CreateOTTPartyPage";
+import CreateETCPartyPage from "./pages/CreateETCPartyPage";
 
 export const GlobalStyle = createGlobalStyle`
   ${reset} 
@@ -44,6 +47,21 @@ function App() {
         />
         <Route path="/category/ott" component={OTTCategoryPage} exact />
         <Route path="/category/etc" component={EtcCategoryPage} exact />
+        <Route
+          path="/category/create/delivery"
+          component={CreateDeliveryPartyPage}
+          exact
+        />
+        <Route
+          path="/category/create/ott"
+          component={CreateOTTPartyPage}
+          exact
+        />
+        <Route
+          path="/category/create/etc"
+          component={CreateETCPartyPage}
+          exact
+        />
         <Redirect from="*" to="/" />
       </Switch>
     </>
