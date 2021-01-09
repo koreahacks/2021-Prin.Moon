@@ -45,3 +45,8 @@ export const resMessage = {
   NO_X: (x: string) => `존재하지 않는 ${x}`,
   ALREADY_X: (x: string) => `존재하는 ${x}`,
 };
+
+export const clientURI =
+  process.env.NODE_ENV === "dev"
+    ? (process.env.CLIENT_URI_DEV as string)
+    : (process.env.CLIENT_URI_PRODUCTION as string);

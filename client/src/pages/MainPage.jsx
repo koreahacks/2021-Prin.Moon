@@ -143,7 +143,6 @@ export default function MainPage() {
               <GuitarIcon />
             </CategoryIcon>
           </CategoryIcons>
-
           <TitleLayOut>
             <Title>내 근처 N빵</Title>
             <ShowMoreInfoBtn>더 보기</ShowMoreInfoBtn>

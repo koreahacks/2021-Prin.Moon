@@ -1,4 +1,6 @@
 import express, { NextFunction, Request, Response } from "express";
+import { resMessage, statusCode } from "../common/constant";
+import JsonResponse from "../common/types/json-response";
 import PotDTO from "./dto/pot.dto";
 import UpdatePotRequest from "./dto/update-pot-request.dto";
 import PotService from "./pot.service";
@@ -8,6 +10,25 @@ const PotRouter = express.Router();
 PotRouter.get("/recent", async (req: Request, res: Response) => {
   const potList = await PotService.getRecentPots();
   res.json(potList);
+});
+
+PotRouter.get("/near", async (req: Request, res: Response) => {
+  const { latitude, longitude } = req.query;
+  if (!latitude || !longitude)
+    return res
+      .status(statusCode.BAD_REQUEST)
+      .json(new JsonResponse(false, resMessage.NO_X("User location")));
+  try {
+    const sortedPotList = await PotService.getPotsNearBy(
+      Number(latitude),
+      Number(longitude)
+    );
+    res.json(sortedPotList);
+  } catch (e) {
+    res
+      .status(statusCode.INTERNAL_SERVER_ERROR)
+      .json(new JsonResponse(false, resMessage.INTERNAL_SERVER_ERROR));
+  }
 });
 
 PotRouter.get(
@@ -23,6 +44,27 @@ PotRouter.get(
   }
 );
 
+PotRouter.get("/near/:categoryId", async (req: Request, res: Response) => {
+  const { latitude, longitude } = req.query;
+  const categoryId = Number(req.params.categoryId);
+  if (!latitude || !longitude)
+    return res
+      .status(statusCode.BAD_REQUEST)
+      .json(new JsonResponse(false, resMessage.NO_X("User location")));
+  try {
+    const sortedPotList = await PotService.getPotsWithCategoryNearBy(
+      categoryId,
+      Number(latitude),
+      Number(longitude)
+    );
+    res.json(sortedPotList);
+  } catch (e) {
+    res
+      .status(statusCode.INTERNAL_SERVER_ERROR)
+      .json(new JsonResponse(false, resMessage.INTERNAL_SERVER_ERROR));
+  }
+});
+
 PotRouter.post("/", async (req: Request, res: Response, next: NextFunction) => {
   const potDTO = new PotDTO(req.body);
   const { code, json } = await PotService.createPot(potDTO);
@@ -34,7 +76,10 @@ PotRouter.patch(
   async (req: Request, res: Response, next: NextFunction) => {
     const { potId } = req.params;
     const potDTO = new UpdatePotRequest(req.body);
-    const { code, json } = await PotService.updatePot(Number(potId), potDTO);
+    const { code, json } = await PotService.updatePotInfo(
+      Number(potId),
+      potDTO
+    );
     res.status(code).json(json);
   }
 );

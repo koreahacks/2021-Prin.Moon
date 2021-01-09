@@ -3,6 +3,7 @@ import styled from "styled-components";
 import LogoImg from "../assets/logo.png";
 
 import { KakaoTalk as KakaoTalkIcon } from "@styled-icons/remix-fill/KakaoTalk";
+import env from "../common/const";
 
 const Wrapper = styled.div`
   display: flex;
@@ -34,7 +35,7 @@ const MakerNames = styled.span`
   font-size: 0.9rem;
 `;
 
-const KaKaoBtn = styled.div`
+const KaKaoBtn = styled.a`
   padding: 0;
   width: 100%;
   height: 45px;
@@ -46,6 +47,7 @@ const KaKaoBtn = styled.div`
   font-size: 14px;
   font-weight: bold;
   text-align: center;
+  text-decoration: none;
   cursor: pointer;
   &:hover {
     box-shadow: 0 0px 15px 0 rgba(0, 0, 0, 0.2);
@@ -62,7 +64,7 @@ export default function LoginPage() {
     <Wrapper>
       <Description>세상에 없던 빵!</Description>
       <Logo src={LogoImg} alt="로고 이미지" />
-      <KaKaoBtn onClick={() => console.log("socialLogin!")}>
+      <KaKaoBtn href={`${env.SERVER_BASE_URL}/auth/login`}>
         <CustomKakaoIcon />
         카카오톡으로 로그인하기
       </KaKaoBtn>

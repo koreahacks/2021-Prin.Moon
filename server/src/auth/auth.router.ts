@@ -3,6 +3,7 @@ import AuthService from "./auth.service";
 import { kakaoOAuthConfig } from "../config/kakao-oauth";
 import KakaoUserInfo from "../common/types/kakao";
 import UserService from "../user/user.service";
+import { clientURI } from "../common/constant";
 
 const AuthRouter = express.Router();
 
@@ -24,10 +25,6 @@ AuthRouter.get("/callback/kakao", async (req: Request, res: Response) => {
   const jwtToken = AuthService.generateToken(user.id, user.name);
 
   res.cookie("Authorization", jwtToken);
-  const clientURI =
-    process.env.NODE_ENV === "dev"
-      ? (process.env.CLIENT_URI_DEV as string)
-      : (process.env.CLIENT_URI_PRODUCTION as string);
   res.redirect(clientURI);
 });
 

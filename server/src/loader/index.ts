@@ -19,9 +19,9 @@ export default async (app: express.Application) => {
   app.use(
     cors({
       origin:
-        process.env.NODE_ENV === "development"
-          ? process.env.FRONT_DOMAIN_DEVELOP
-          : process.env.FRONT_DOMAIN_PRODUCTION,
+        process.env.NODE_ENV === "dev"
+          ? process.env.CLIENT_URI_DEV
+          : process.env.CLIENT_URI_PRODUCTION,
       credentials: true,
     })
   );

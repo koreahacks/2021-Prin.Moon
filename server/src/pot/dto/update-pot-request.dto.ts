@@ -1,7 +1,8 @@
 export default class UpdatePotRequest {
   title?: string;
   endTime?: Date;
-  location?: string;
+  latitude?: number;
+  longitude?: number;
   appLink?: string;
   kakaoLink?: string;
   memo?: string;
@@ -12,7 +13,8 @@ export default class UpdatePotRequest {
   constructor(body: any) {
     this.title = body.title ? body.title : null;
     this.endTime = body.endtime ? body.endTime : null;
-    this.location = body.location ? body.location : null;
+    this.latitude = body.latitude ? body.latitude : null;
+    this.longitude = body.longitude ? body.longitude : null;
     this.appLink = body.appLink ? body.appLink : null;
     this.kakaoLink = body.kakaoLink ? body.kakaoLink : null;
     this.memo = body.memo ? body.memo : null;

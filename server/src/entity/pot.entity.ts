@@ -25,8 +25,11 @@ export default class PotEntity {
   @Column({ type: "date", nullable: true })
   endTime?: Date;
 
-  @Column({ type: "varchar", nullable: true })
-  location?: string;
+  @Column({ type: "double", nullable: true })
+  latitude?: number;
+
+  @Column({ type: "double", nullable: true })
+  longitude?: number;
 
   @Column({ type: "varchar", nullable: true })
   appLink?: string;
