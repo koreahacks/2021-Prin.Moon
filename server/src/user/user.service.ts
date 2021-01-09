@@ -1,7 +1,9 @@
 import { getRepository } from "typeorm";
 import KakaoUserInfo from "../common/types/kakao";
 import UserEntity from "../entity/user.entity";
-import KakaoToUserDTO from "./dto/user.dto";
+import { KakaoToUserDTO, UserDTO } from "./dto/user.dto";
+import { resMessage, statusCode } from "../common/constant";
+import JsonResponse from "../common/types/json-response";
 
 const UserService = {
   getOrCreateUser: async (userInfo: KakaoUserInfo) => {
@@ -17,6 +19,75 @@ const UserService = {
     const userRepository = getRepository(UserEntity);
     const user = await userRepository.findOne({ where: { id, name } });
     return user;
+  },
+  updateUserCredentials: async (
+    id: number,
+    name: string,
+    credibility: number
+  ) => {
+    try {
+      const userRepository = getRepository(UserEntity);
+      const targetUser = await userRepository.findOne({ where: { id, name } });
+      if (!targetUser) {
+        return {
+          code: statusCode.BAD_REQUEST,
+          json: new JsonResponse(false, resMessage.NO_X("user")),
+        };
+      }
+      const {
+        credibility: prevCredibility,
+        assesmentCount: prevAssesmentCount,
+      } = targetUser;
+
+      const nextCredibility = +(
+        (prevCredibility + credibility) /
+        prevAssesmentCount
+      ).toFixed(1);
+
+      const updatedUser = userRepository.merge(targetUser, {
+        credibility: nextCredibility,
+        assesmentCount: prevAssesmentCount + 1,
+      });
+      await userRepository.save(updatedUser);
+      return {
+        code: statusCode.OK,
+        json: updatedUser,
+      };
+    } catch (e) {
+      return {
+        code: statusCode.DB_ERROR,
+        json: new JsonResponse(false, resMessage.DB_ERROR),
+      };
+    }
+  },
+  updateUserSavedMoney: async (id: number, name: string, money: number) => {
+    try {
+      const userRepository = getRepository(UserEntity);
+      const targetUser = await userRepository.findOne({ where: { id, name } });
+      if (!targetUser) {
+        return {
+          code: statusCode.BAD_REQUEST,
+          json: new JsonResponse(false, resMessage.NO_X("user")),
+        };
+      }
+      const { savedMoney: prevSavedMoney } = targetUser;
+
+      const nextSavedMoney = prevSavedMoney + money;
+
+      const updatedUser = userRepository.merge(targetUser, {
+        savedMoney: nextSavedMoney,
+      });
+      await userRepository.save(updatedUser);
+      return {
+        code: statusCode.OK,
+        json: updatedUser,
+      };
+    } catch (e) {
+      return {
+        code: statusCode.DB_ERROR,
+        json: new JsonResponse(false, resMessage.DB_ERROR),
+      };
+    }
   },
 };
 
