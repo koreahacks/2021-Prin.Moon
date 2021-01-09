@@ -10,7 +10,7 @@ import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Collapse from "@material-ui/core/Collapse";
 import SvgIcon from "@material-ui/core/SvgIcon";
 import Bread from "../assets/bread2.jpg";
-import Header from "../components/Header";
+import PageHeader from "../components/PageHeader";
 import { useHistory } from "react-router-dom";
 import myAxios from "../utils/myAxios";
 import env from "../common/const";
@@ -165,7 +165,7 @@ export default function MyPage(props) {
   };
   return (
     <Fragment>
-      <Header title={"나의 N빵"}></Header>
+      <PageHeader title={"나의 N빵"} type={"mypage"} />
       <Body>
         <AvatarAlign>
           <BadgeAvatar name={info.name} />
