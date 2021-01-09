@@ -53,6 +53,7 @@ const StyledListWrapper = styled.div`
   align-items: center;
   flex-direction: column;
   padding: 15px 20px;
+  margin: 0.5rem;
 `;
 
 const StyledListTopWrapper = styled.div`

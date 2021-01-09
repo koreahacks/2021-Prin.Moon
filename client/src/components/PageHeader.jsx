@@ -14,6 +14,7 @@ const Wrapper = styled.div`
   height: 7vh;
   padding: 1.5vh 6vw;
   background-color: white;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
 `;
 
 const ArrowIcon = styled(ArrowBack)`

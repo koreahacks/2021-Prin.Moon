@@ -139,13 +139,25 @@ export default function MainPage() {
           </TitleLayOut>
           <CategoryIcons>
             <CategoryIcon>
-              <BikeIcon />
+              <BikeIcon
+                onClick={() => {
+                  history.push("/category/delivery");
+                }}
+              />
             </CategoryIcon>
             <CategoryIcon>
-              <NetflixIcon />
+              <NetflixIcon
+                onClick={() => {
+                  history.push("/category/ott");
+                }}
+              />
             </CategoryIcon>
             <CategoryIcon>
-              <GuitarIcon />
+              <GuitarIcon
+                onClick={() => {
+                  history.push("/category/etc");
+                }}
+              />
             </CategoryIcon>
           </CategoryIcons>
           <TitleLayOut>
