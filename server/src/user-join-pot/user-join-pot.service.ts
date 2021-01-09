@@ -45,7 +45,7 @@ const UserJoinPotService = {
       }
       const updatedTargetUserJoinPot = userJoinPotRepository.merge(
         targetUserJoinPot,
-        { onGoing: true }
+        { onGoing: false }
       );
       await userJoinPotRepository.save(updatedTargetUserJoinPot);
       return {
