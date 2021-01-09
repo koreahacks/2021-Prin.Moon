@@ -16,7 +16,6 @@ import CreateDeliveryPartyPage from "./pages/CreateDeliveryPartyPage";
 import CreateOTTPartyPage from "./pages/CreateOTTPartyPage";
 import CreateETCPartyPage from "./pages/CreateETCPartyPage";
 import ConfirmAddressPage from "./pages/ConfirmAddressPage";
-import GeoCoder from "./utils/geocode";
 import AddressSearchPage from "./pages/AddressSearchPage";
 import Auth from "./hoc/Auth";
 

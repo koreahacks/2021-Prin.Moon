@@ -2,9 +2,11 @@ import React, { useState, useEffect } from "react";
 import Spinner from "../components/Spinner";
 import { useHistory } from "react-router";
 import myAxios from "../utils/myAxios";
+import useGeoLocation from "../hooks/useGeoLocation";
 
 export default function Auth(Component, loginRequired) {
   function Authentication(props) {
+    const { myLocation } = useGeoLocation();
     const [loading, setLoading] = useState(true);
     const history = useHistory();
     useEffect(() => {
@@ -15,7 +17,15 @@ export default function Auth(Component, loginRequired) {
             history.push("/login");
           }
           if (res.status === 200 && !loginRequired) {
-            history.replace(window.location.pathname);
+            if (!myLocation.place && window.location.pathname !== "/") {
+              if (window.location.pathname === "/address/confirm") {
+                history.replace("/address/confirm");
+              } else {
+                history.replace("/address/search");
+              }
+            } else {
+              history.replace(window.location.pathname);
+            }
           }
           setLoading(false);
         } catch (err) {

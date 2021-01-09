@@ -141,8 +141,6 @@ export default function MainPage() {
     getRecentPotList();
   }, []);
 
-  console.log(nearPotList);
-
   return (
     <>
       <Background>
@@ -189,6 +187,7 @@ export default function MainPage() {
               <ListContainer>
                 {nearPotList.map((pot) => (
                   <PotItem
+                    key={pot.id}
                     id={`near_${pot.id}`}
                     name={pot.category.name}
                     title={pot.title}
@@ -207,6 +206,7 @@ export default function MainPage() {
           <ListContainer>
             {recentPotList.map((pot) => (
               <PotItem
+                key={pot.id}
                 id={`recent_${pot.id}`}
                 name={pot.category.name}
                 title={pot.title}
