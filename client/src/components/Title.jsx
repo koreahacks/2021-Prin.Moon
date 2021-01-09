@@ -5,7 +5,7 @@ const StyledTitle = styled.h2`
   display: block;
   font-size: 25px;
   font-weight: bold;
-  color: #202020;
+  color: #502600;
 `;
 
 export default function Title({ children }) {
