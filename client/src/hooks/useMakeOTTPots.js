@@ -44,7 +44,7 @@ export default function useMakeOTTPots() {
         fee: parseInt(fee),
       };
 
-      const response = await myAxios.post("/pot", modifiedOTTJSONForm);
+      await myAxios.post("/pot", modifiedOTTJSONForm);
     },
     [OTTJSONForm]
   );

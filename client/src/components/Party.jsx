@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import styled from "styled-components";
 import Modal from "../components/Modal";
 import Button from "../components/Button";
@@ -30,15 +30,7 @@ const Memo = styled.div`
   padding-bottom: 1%;
   margin: 1%;
 `;
-const Evaluate = styled.div`
-  background-color: #ffae66;
-  width: 30%;
-  border-top-right-radius: 20px;
-  border-bottom-right-radius: 20px;
-  display: flex;
-  justify-content: center;
-  padding: 10% 0;
-`;
+
 const Title = styled.div`
   font-size: 22px;
   font-weight: bold;

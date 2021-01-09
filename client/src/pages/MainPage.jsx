@@ -5,7 +5,6 @@ import ListContainer from "../components/ListContainer";
 import myAxios from "../utils/myAxios";
 import { EBike2 as BikeIcon } from "@styled-icons/remix-line/EBike2";
 import { Netflix as NetflixIcon } from "@styled-icons/remix-fill/Netflix";
-import { Guitar as GuitarIcon } from "@styled-icons/fa-solid/Guitar";
 import { Plus as PlusIcon } from "@styled-icons/boxicons-regular/Plus";
 import { BellFill as BellFillIcon } from "@styled-icons/bootstrap/BellFill";
 import { PersonFill as PersonFillIcon } from "@styled-icons/bootstrap/PersonFill";
