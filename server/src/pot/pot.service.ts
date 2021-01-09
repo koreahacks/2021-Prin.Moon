@@ -67,7 +67,7 @@ const PotService = {
     const potRepository = getRepository(PotEntity);
     const potList = await potRepository.find({
       relations: ["owner", "category"],
-      take: 7,
+      take: 5,
       where: { isOpened: true },
     });
 

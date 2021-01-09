@@ -4,6 +4,14 @@ import UserJoinPotService from "./user-join-pot.service";
 
 const UserJoinPotRouter = express.Router();
 
+UserJoinPotRouter.get("/:potId", async (req: Request, res: Response) => {
+  const userId = req.user?.id;
+  if (!userId) return;
+  const { potId } = req.body;
+  const isOnGoing = await UserJoinPotService.getUserJoinPot(userId, potId);
+  res.json({ isOnGoing });
+});
+
 UserJoinPotRouter.post("/apply", async (req: Request, res: Response) => {
   const userId = req.user?.id;
   const { potId } = req.body;

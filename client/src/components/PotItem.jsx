@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
+
+import BadalModal from "./JoinModals/BadalModal";
 import styled from "styled-components";
+import { getTimeTillNow } from "../utils/date";
 
 export default function PotItem({ ...props }) {
-  const { name, title, endTime } = props;
+  const { pot } = props;
+
   const PotItemContainer = styled.div`
     display: flex;
     flex-direction: row;
@@ -10,6 +14,7 @@ export default function PotItem({ ...props }) {
     justify-content: space-between;
     padding: 0.5rem 0.1rem;
     margin: 0.3rem 0.1rem;
+    cursor: pointer;
   `;
 
   const PotCategory = styled.div`
@@ -34,11 +39,19 @@ export default function PotItem({ ...props }) {
     font-size: small;
   `;
 
+  const [show, setShow] = useState(false);
+  const toggleModal = () => {
+    setShow(!show);
+  };
+
   return (
-    <PotItemContainer onClick={() => {}}>
-      <PotCategory>{name}</PotCategory>
-      <PotTitle>{title}</PotTitle>
-      <PotEndTime>{endTime ? endTime : "마감 없음"}</PotEndTime>
+    <PotItemContainer onClick={toggleModal}>
+      <PotCategory>{pot.category.name}</PotCategory>
+      <PotTitle>{pot.title}</PotTitle>
+      <PotEndTime>
+        {pot.endTime ? getTimeTillNow(pot.endTime) : "마감없음"}
+      </PotEndTime>
+      <BadalModal toggleModal={toggleModal} show={show} pot={pot} />
     </PotItemContainer>
   );
 }
