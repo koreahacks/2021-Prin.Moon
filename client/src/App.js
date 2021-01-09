@@ -37,13 +37,12 @@ export const GlobalStyle = createGlobalStyle`
 `;
 
 function App() {
-  console.log(GeoCoder.getLatLngFromAddress("고려대학교"));
   return (
     <>
       <GlobalStyle />
       <Switch>
         <Route path="/" component={Auth(MainPage, true)} exact />
-        <Route path="/login" component={LoginPage} exact />
+        <Route path="/login" component={Auth(LoginPage, false)} exact />
         <Route path="/mypage" component={MyPage} exact />
         <Route path="/recruitedParty" component={RecruitedParty} exact />
         <Route path="/participatedParty" component={ParticipatedParty} exact />
