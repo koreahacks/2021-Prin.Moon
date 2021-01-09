@@ -12,19 +12,6 @@ PotRouter.get("/recent", async (req: Request, res: Response) => {
   res.json(potList);
 });
 
-PotRouter.get(
-  "/:categoryId",
-  async (req: Request, res: Response, next: NextFunction) => {
-    const { categoryId } = req.params;
-    try {
-      const potList = await PotService.getPotsByCategory(Number(categoryId));
-      res.json(potList);
-    } catch (e) {
-      next(e);
-    }
-  }
-);
-
 PotRouter.get("/near", async (req: Request, res: Response) => {
   const { latitude, longitude } = req.query;
   if (!latitude || !longitude)
@@ -43,6 +30,19 @@ PotRouter.get("/near", async (req: Request, res: Response) => {
       .json(new JsonResponse(false, resMessage.INTERNAL_SERVER_ERROR));
   }
 });
+
+PotRouter.get(
+  "/:categoryId",
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { categoryId } = req.params;
+    try {
+      const potList = await PotService.getPotsByCategory(Number(categoryId));
+      res.json(potList);
+    } catch (e) {
+      next(e);
+    }
+  }
+);
 
 PotRouter.get("/near/:categoryId", async (req: Request, res: Response) => {
   const { latitude, longitude } = req.query;
