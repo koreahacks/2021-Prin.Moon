@@ -15,8 +15,31 @@ const MarginedInput = styled(Input)`
   margin: 1vh 0;
 `;
 
-const MarginedTextArea = styled(TextArea)`
+const MarginedTextArea = styled.textarea`
   margin: 1vh 0;
+  width: 100%;
+  outline: none;
+  border: none;
+  border-radius: 20px;
+  padding: 15px;
+  resize: none;
+  height: 18.5vh;
+  font-family: "Noto Sans KR", sans-serif;
+
+  ::placeholder,
+  ::-webkit-input-placeholder {
+    text-align: center;
+    line-height: 18.5vh;
+    font-family: "Noto Sans KR", sans-serif;
+  }
+  :-ms-input-placeholder {
+    text-align: center;
+    line-height: 18.5vh;
+    font-family: "Noto Sans KR", sans-serif;
+  }
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 export default function CreateOTTPartyPage() {
@@ -24,8 +47,6 @@ export default function CreateOTTPartyPage() {
   const history = useHistory();
   const [fee, setFee] = React.useState("");
   const [memo, setMemo] = React.useState("");
-
-  console.log(OTTForm);
 
   return (
     <>
@@ -44,18 +65,15 @@ export default function CreateOTTPartyPage() {
             placeholder="남은 인원  (명)"
             value={OTTForm.totalPeople}
             onChange={(e) => {
-              console.log(e.target);
               setOTTForm({ ...OTTForm, totalPeople: e.target.value });
             }}
           />
 
-          <input
+          <MarginedInput
             placeholder="가격"
-            value={OTTForm.fee}
+            value={fee}
             onChange={(e) => {
-              console.log(fee);
               setFee(e.target.value);
-              setOTTForm({ ...OTTForm, fee: e.tareget.value });
             }}
           />
 
@@ -63,30 +81,31 @@ export default function CreateOTTPartyPage() {
             placeholder="오픈카톡방 링크"
             value={OTTForm.kakaoLink}
             onChange={(e) => {
-              // setOTTForm({ ...OTTForm, kakaoLink: e.target.value });
+              setOTTForm({ ...OTTForm, kakaoLink: e.target.value });
             }}
           />
 
-          <textarea
+          <MarginedTextArea
             placeholder="메모(선택)"
             text={OTTForm.memo}
             onChange={(e) => {
-              console.log(e);
-              console.log(memo);
               setMemo(e.target.value);
-              setOTTForm({ ...OTTForm, memo: e.target.value });
             }}
           />
 
           <Button
-            color={Validation.isValidOTTForm(OTTForm) ? "primary" : "secondary"}
+            color={
+              Validation.isValidOTTForm({ ...OTTForm, fee, memo })
+                ? "primary"
+                : "secondary"
+            }
             onClick={
-              Validation.isValidOTTForm(OTTForm)
+              Validation.isValidOTTForm({ ...OTTForm, fee, memo })
                 ? async (e) => {
                     e.preventDefault();
                     if (window.confirm("게시글을 올리시겠어요?")) {
                       try {
-                        await postOTTPot();
+                        await postOTTPot(memo, fee);
                         alert("파티 모집글을 올렸습니다!");
                         resetOTTForm();
                         history.push("/");

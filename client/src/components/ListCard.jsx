@@ -5,18 +5,11 @@ import { calculateDistance } from "../utils/distance";
 
 export default function ListCard(props) {
   const {
-    id: listId,
     title,
     createAt,
     endTime,
-    memo,
-    fee,
-    isOpened,
-    ownerId,
-    categoryId,
     joinedPeople,
     totalPeople,
-    owner,
     distance,
   } = props;
 

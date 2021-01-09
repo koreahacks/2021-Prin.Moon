@@ -57,7 +57,7 @@ const CategoryIcon = styled.div`
 
 const CategoryIcons = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
 `;
 
 const PlusButtonWrapper = styled.div`
@@ -173,9 +173,6 @@ export default function MainPage() {
             </CategoryIcon>
             <CategoryIcon>
               <NetflixIcon onClick={() => isHasLocation("/category/ott")} />
-            </CategoryIcon>
-            <CategoryIcon>
-              <GuitarIcon onClick={() => isHasLocation("/category/etc")} />
             </CategoryIcon>
           </CategoryIcons>
           {myLocation.place && (

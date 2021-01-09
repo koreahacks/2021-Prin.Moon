@@ -36,13 +36,18 @@ export default function useMakeOTTPots() {
       categoryId: 2,
     });
   };
-  const postOTTPot = useCallback(async () => {
-    const modifiedOTTJSONForm = {
-      ...OTTJSONForm,
-    };
-    console.log(OTTJSONForm);
-    const response = await myAxios.post("/pot", modifiedOTTJSONForm);
-  }, [OTTJSONForm]);
+  const postOTTPot = useCallback(
+    async (memo, fee) => {
+      const modifiedOTTJSONForm = {
+        ...OTTJSONForm,
+        memo,
+        fee: parseInt(fee),
+      };
+
+      const response = await myAxios.post("/pot", modifiedOTTJSONForm);
+    },
+    [OTTJSONForm]
+  );
 
   return {
     OTTForm,
