@@ -10,15 +10,15 @@ const myAxios = {
   },
 
   post: async (path, data) => {
-    return axios.post(URL + path, data, { withCredentials: true });
+    return await axios.post(URL + path, data, { withCredentials: true });
   },
 
   put: async (path, data) => {
-    return axios.put(URL + path, data, { withCredentials: true });
+    return await axios.put(URL + path, data, { withCredentials: true });
   },
 
   delete: async (path) => {
-    return axios.delete(URL + path, { withCredentials: true });
+    return await axios.delete(URL + path, { withCredentials: true });
   },
 };
 

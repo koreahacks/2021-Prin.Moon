@@ -8,6 +8,6 @@ const StyledTitle = styled.h2`
   color: #502600;
 `;
 
-export default function Title({ children }) {
-  return <StyledTitle>{children}</StyledTitle>;
+export default function Title({ children, className }) {
+  return <StyledTitle className={className}>{children}</StyledTitle>;
 }
