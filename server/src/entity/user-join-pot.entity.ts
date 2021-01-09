@@ -1,4 +1,4 @@
-import { Entity, JoinColumn, ManyToOne, PrimaryColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from "typeorm";
 import PotEntity from "./pot.entity";
 import UserEntity from "./user.entity";
 
@@ -9,6 +9,9 @@ export default class UserJoinPotEntity {
 
   @PrimaryColumn({ type: "int" })
   potId!: number;
+
+  @Column({ type: "boolean", default: true })
+  onGoing!: boolean;
 
   @ManyToOne(() => UserEntity, (user) => user.userJoinPot, {
     onUpdate: "CASCADE",
