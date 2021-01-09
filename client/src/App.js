@@ -6,6 +6,10 @@ import MainPage from "./pages/MainPage";
 import LoginPage from "./pages/LoginPage";
 import MyPage from "./pages/MyPage";
 import PartyMakingPage from "./pages/PartyMakingPage";
+import CategorySelectPage from "./pages/CategorySelectPage";
+import DeliveryCategoryPage from "./pages/DeliveryCategoryPage";
+import OTTCategoryPage from "./pages/OTTCategoryPage";
+import EtcCategoryPage from "./pages/EtcCategoryPage";
 
 export const GlobalStyle = createGlobalStyle`
   ${reset} 
@@ -24,7 +28,6 @@ export const GlobalStyle = createGlobalStyle`
 `;
 
 function App() {
-  console.log("ibal");
   return (
     <>
       <GlobalStyle />
@@ -33,6 +36,14 @@ function App() {
         <Route path="/login" component={LoginPage} exact />
         <Route path="/mypage" component={MyPage} exact />
         <Route path="/partymake" component={PartyMakingPage} exact />
+        <Route path="/category/select" component={CategorySelectPage} exact />
+        <Route
+          path="/category/delivery"
+          component={DeliveryCategoryPage}
+          exact
+        />
+        <Route path="/category/ott" component={OTTCategoryPage} exact />
+        <Route path="/category/etc" component={EtcCategoryPage} exact />
         <Redirect from="*" to="/" />
       </Switch>
     </>
