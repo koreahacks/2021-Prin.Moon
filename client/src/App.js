@@ -41,7 +41,6 @@ function App() {
         <Route path="/" component={Auth(MainPage, true)} exact />
         <Route path="/login" component={LoginPage} exact />
         <Route path="/mypage" component={MyPage} exact />
-        <Route path="/login" component={LoginPage} exact />
         <Route path="/recruitedParty" component={RecruitedParty} exact />
         <Route path="/participatedParty" component={ParticipatedParty} exact />
         <Route path="/partymake" component={PartyMakingPage} exact />
