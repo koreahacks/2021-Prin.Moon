@@ -17,6 +17,8 @@ import {
 import useMakePots from "../hooks/useMakePots";
 import useGeoLocation from "../hooks/useGeoLocation";
 import date from "../utils/date";
+import { useHistory } from "react-router-dom";
+import Validation from "../utils/validation";
 
 const theme = createMuiTheme({
   palette: {
@@ -64,9 +66,16 @@ const useStyles = makeStyles((theme) => ({
 
 export default function CreateDeliveryPartyPage() {
   const classes = useStyles();
-  const { deliveryForm, setDeliveryForm, postDeliveryPot } = useMakePots();
+  const {
+    deliveryForm,
+    setDeliveryForm,
+    postDeliveryPot,
+    resetDeliveryForm,
+  } = useMakePots();
   const { myLocation } = useGeoLocation();
   const [endTime, setEndTime] = useState(date.getCurrentDate());
+  const history = useHistory();
+
   return (
     <>
       <Background>
@@ -128,22 +137,44 @@ export default function CreateDeliveryPartyPage() {
             }}
           />
           <Button
-            color="primary"
-            onClick={async (e) => {
-              e.preventDefault();
-              if (window.confirm("게시글을 올리시겠어요?")) {
-                try {
-                  await postDeliveryPot(
-                    endTime,
-                    myLocation.lat,
-                    myLocation.lng
-                  );
-                  alert("파티 모집글을 올렸습니다!");
-                } catch (e) {
-                  alert("파티 모집글 에러!");
-                }
-              }
-            }}
+            color={
+              Validation.isValidDeliveryForm({
+                ...deliveryForm,
+                endTime,
+                latitude: myLocation.lat,
+                longitude: myLocation.lng,
+              })
+                ? "primary"
+                : "secondary"
+            }
+            onClick={
+              Validation.isValidDeliveryForm({
+                ...deliveryForm,
+                endTime,
+                latitude: myLocation.lat,
+                longitude: myLocation.lng,
+              })
+                ? async (e) => {
+                    e.preventDefault();
+                    if (window.confirm("게시글을 올리시겠어요?")) {
+                      try {
+                        await postDeliveryPot(
+                          endTime,
+                          myLocation.lat,
+                          myLocation.lng
+                        );
+                        alert("파티 모집글을 올렸습니다!");
+                        resetDeliveryForm();
+                        history.push("/");
+                      } catch (e) {
+                        alert("파티 모집글 에러!");
+                      }
+                    }
+                  }
+                : (e) => {
+                    e.preventDefault();
+                  }
+            }
           >
             게시하기
           </Button>

@@ -30,6 +30,19 @@ const deliveryJSONFormState = selector({
 export default function useMakePots() {
   const [deliveryForm, setDeliveryForm] = useRecoilState(deliveryFormState);
   const deliveryJSONForm = useRecoilValue(deliveryJSONFormState);
+  const resetDeliveryForm = () => {
+    setDeliveryForm({
+      title: "",
+      endTime: "",
+      latitude: null,
+      longitude: null,
+      appLink: "",
+      kakaoLink: "",
+      memo: "",
+      fee: "",
+      categoryId: 1,
+    });
+  };
 
   const postDeliveryPot = useCallback(
     async (endTime, latitude, longitude) => {
@@ -39,11 +52,16 @@ export default function useMakePots() {
         latitude: parseFloat(latitude),
         longitude: parseFloat(longitude),
       };
-      console.log(modifiedDeliveryJSONForm);
       const response = await myAxios.post("/pot", modifiedDeliveryJSONForm);
     },
     [deliveryJSONForm]
   );
 
-  return { deliveryForm, setDeliveryForm, deliveryJSONForm, postDeliveryPot };
+  return {
+    deliveryForm,
+    setDeliveryForm,
+    deliveryJSONForm,
+    postDeliveryPot,
+    resetDeliveryForm,
+  };
 }
