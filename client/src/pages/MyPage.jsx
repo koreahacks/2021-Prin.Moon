@@ -10,7 +10,7 @@ import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Collapse from "@material-ui/core/Collapse";
 import SvgIcon from "@material-ui/core/SvgIcon";
 import Bread from "../assets/bread2.jpg";
-import PageHeader from "../components/PageHeader";
+import Header from "../components/Header";
 import { Link } from "react-router-dom";
 import RecruitedParty from "./RecruitedParty";
 import ParticipatedParty from "./ParticipatedParty";
@@ -175,7 +175,7 @@ export default function MyPage(props) {
   };
   return (
     <Fragment>
-      <PageHeader title={"나의 N빵"} type={"mypage"} />
+      <Header title={"나의 N빵"}></Header>
       <Body>
         <AvatarAlign>
           <BadgeAvatar name={info.name} />

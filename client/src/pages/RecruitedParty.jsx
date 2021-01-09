@@ -18,6 +18,7 @@ export default function RecruitedParty(props) {
   React.useEffect(() => {
     (async () => {
       const { data } = await myAxios.get("/pot/ownered-pots");
+      console.log(data);
       if (data) {
         setParties(data);
       }
@@ -30,7 +31,7 @@ export default function RecruitedParty(props) {
       <Parties>
       {parties.map((party) => {
           return (
-            <Party place={party.distance} title={party.title} time={party.createdAt} user={party.owner}></Party>
+            <Party isRecruited={true} place={party.distance} title={party.title} time={party.createdAt} user={party.owner}></Party>
           );
         })}
       </Parties>

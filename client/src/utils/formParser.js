@@ -6,6 +6,14 @@ const formParser = {
       fee: parseInt(deliveryForm.fee),
     };
   },
+  changeOTTFormToJSON: (OTTForm) => {
+    return {
+      ...OTTForm,
+      fee: parseInt(OTTForm.fee),
+      memo: OTTForm.memo.length === 0 ? null : OTTForm.memo,
+      totalPeople: parseInt(OTTForm.totalPeople),
+    };
+  },
 };
 
 export default formParser;
