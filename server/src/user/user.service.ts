@@ -20,14 +20,10 @@ const UserService = {
     const user = await userRepository.findOne({ where: { id, name } });
     return user;
   },
-  updateUserCredibility: async (
-    id: number | undefined,
-    name: string | undefined,
-    credibility: number
-  ) => {
+  updateUserCredibility: async (id: number, credibility: number) => {
     try {
       const userRepository = getRepository(UserEntity);
-      const targetUser = await userRepository.findOne({ where: { id, name } });
+      const targetUser = await userRepository.findOne({ where: { id } });
       if (!targetUser) {
         return {
           code: statusCode.BAD_REQUEST,
