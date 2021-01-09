@@ -23,10 +23,10 @@ export default class PotEntity {
   endTime!: Date;
 
   @Column({ type: "varchar" })
-  location!: string;
+  location?: string;
 
   @Column({ type: "varchar" })
-  appLink!: string;
+  appLink?: string;
 
   @Column({ type: "varchar" })
   kakaoLink!: string;
@@ -35,7 +35,7 @@ export default class PotEntity {
   memo!: string;
 
   @Column({ type: "int" })
-  badalbee!: number;
+  fee!: number;
 
   @Column({ type: "bool", default: true })
   isOpened!: boolean;
@@ -45,6 +45,9 @@ export default class PotEntity {
 
   @Column({ type: "int" })
   categoryId!: number;
+
+  @Column({ type: "int" })
+  totalPeople?: number;
 
   @OneToMany(() => UserJoinPotEntity, (userJoinPot) => userJoinPot.pot, {
     cascade: true,
