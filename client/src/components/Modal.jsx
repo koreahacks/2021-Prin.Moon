@@ -67,11 +67,11 @@ export default function SimpleModal(props) {
       </div>
       <div className={classes.body}>
         <Align>
-            {props.contents}
+            {props.children}
         </Align>
       </div>
       <Align>
-        {
+        { 
           props.buttons.map((button)=>button)
         }
       </Align>
