@@ -192,7 +192,9 @@ export default function MainPage() {
                     name={pot.category.name}
                     title={pot.title}
                     endTime={
-                      pot.endTime ? getTimeTillNow(pot.endTime) : "마감없음"
+                      pot.endTime
+                        ? `마감 ${getTimeTillNow(pot.endTime)}`
+                        : "마감 없음"
                     }
                   />
                 ))}
@@ -210,7 +212,11 @@ export default function MainPage() {
                 id={`recent_${pot.id}`}
                 name={pot.category.name}
                 title={pot.title}
-                endTime={pot.endTime ? getTimeTillNow(pot.endTime) : "마감없음"}
+                endTime={
+                  pot.endTime
+                    ? `마감 ${getTimeTillNow(pot.endTime)}`
+                    : "마감 없음"
+                }
               />
             ))}
           </ListContainer>

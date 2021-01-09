@@ -20,11 +20,9 @@ const calculateCurrentTime = (time) => {
   let isMinus = false;
 
   let minutesTillNow = parseInt(
-    (
-      (now.getTime() - fromTime.getTime()) /
+    (now.getTime() - fromTime.getTime()) /
       (Time.MILLISECONDS_PER_SECOND * Time.SECONDS_PER_MINUTE)
-    ).toString()
-  );
+  ).toString();
   if (minutesTillNow <= 0) {
     isMinus = true;
     minutesTillNow = Math.abs(minutesTillNow);
@@ -32,28 +30,31 @@ const calculateCurrentTime = (time) => {
   return [now, fromTime, isMinus, minutesTillNow];
 };
 
-export const getTimeTillNow = (time) => {
+export const getTimeTillNow = (time, type = "past") => {
   const [now, fromTime, isMinus, minutesTillNow] = calculateCurrentTime(time);
-  const lastWord = `${isMinus ? "후" : "전"}`;
+
+  if (!isMinus && type === "future") {
+    return "지남";
+  }
 
   if (minutesTillNow < Time.MINUTES_PER_HOUR)
-    return minutesTillNow.toString() + "분" + lastWord;
+    return minutesTillNow.toString() + "분전";
 
   const hoursTillNow = minutesTillNow / Time.MINUTES_PER_HOUR;
   if (hoursTillNow < Time.HOURS_PER_DAY)
-    return parseInt(hoursTillNow.toString()).toString() + "시간" + lastWord;
+    return parseInt(hoursTillNow.toString()).toString() + "시간전";
 
-  const daysTillNow = now.getDate() - fromTime.getDate();
+  const daysTillNow = Math.abs(now.getDate() - fromTime.getDate());
   if (daysTillNow <= Time.DAYS_PER_MONTH)
-    return parseInt(daysTillNow.toString()).toString() + "일" + lastWord;
+    return parseInt(daysTillNow.toString()).toString() + "일전";
 
   const monthsTillNow = daysTillNow / Time.DAYS_PER_MONTH;
   if (monthsTillNow < Time.MONTHES_PER_YEAR)
-    return parseInt(monthsTillNow.toString()).toString() + "달" + lastWord;
+    return parseInt(monthsTillNow.toString()).toString() + "달전";
 
   const yearsTillNow = monthsTillNow / Time.MONTHES_PER_YEAR;
 
-  return parseInt(yearsTillNow.toString()).toString() + "년" + lastWord;
+  return parseInt(yearsTillNow.toString()).toString() + "년전";
 };
 
 export default date;
