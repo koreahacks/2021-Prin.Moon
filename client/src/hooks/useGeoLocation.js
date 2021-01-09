@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { atom, selector, useRecoilState, useRecoilValue } from "recoil";
+import { atom, useRecoilState } from "recoil";
 import GeoCoder from "../utils/geocode";
 
 // 아톰 = 데이터 조각(키와 기본값만 설정)

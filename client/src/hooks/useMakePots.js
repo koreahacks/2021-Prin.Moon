@@ -51,7 +51,7 @@ export default function useMakePots() {
         latitude: parseFloat(latitude),
         longitude: parseFloat(longitude),
       };
-      const response = await myAxios.post("/pot", modifiedDeliveryJSONForm);
+      await myAxios.post("/pot", modifiedDeliveryJSONForm);
     },
     [deliveryJSONForm]
   );
