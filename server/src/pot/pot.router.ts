@@ -55,10 +55,19 @@ PotRouter.get(
   "/:potId",
   async (req: Request, res: Response, next: NextFunction) => {
     const { potId } = req.params;
+    const { latitude, longitude } = req.query;
+    if (!latitude || !longitude)
+      return res
+        .status(statusCode.BAD_REQUEST)
+        .json(new JsonResponse(false, resMessage.NO_X("User location")));
     try {
-      const potInfo = await PotService.getPotById(Number(potId));
+      const { code, json } = await PotService.getPotById(
+        Number(potId),
+        Number(latitude),
+        Number(longitude)
+      );
 
-      res.json(potInfo);
+      res.status(code).json(json);
     } catch (e) {
       return res
         .status(statusCode.DB_ERROR)

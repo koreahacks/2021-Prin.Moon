@@ -24,7 +24,7 @@ const sortPotsByLocation = (
   return PotListWithDistance;
 };
 
-const getDistance = (
+export const getDistance = (
   userLatitude: number,
   userLongitude: number,
   potLatitude: number,
