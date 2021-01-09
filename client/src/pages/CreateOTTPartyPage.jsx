@@ -22,6 +22,8 @@ const MarginedTextArea = styled(TextArea)`
 export default function CreateOTTPartyPage() {
   const { OTTForm, setOTTForm, postOTTPot, resetOTTForm } = useMakeOTTPots();
   const history = useHistory();
+  const [fee, setFee] = React.useState("");
+  const [memo, setMemo] = React.useState("");
 
   console.log(OTTForm);
 
@@ -42,14 +44,17 @@ export default function CreateOTTPartyPage() {
             placeholder="남은 인원  (명)"
             value={OTTForm.totalPeople}
             onChange={(e) => {
+              console.log(e.target);
               setOTTForm({ ...OTTForm, totalPeople: e.target.value });
             }}
           />
 
-          <MarginedInput
+          <input
             placeholder="가격"
             value={OTTForm.fee}
             onChange={(e) => {
+              console.log(fee);
+              setFee(e.target.value);
               setOTTForm({ ...OTTForm, fee: e.tareget.value });
             }}
           />
@@ -58,15 +63,17 @@ export default function CreateOTTPartyPage() {
             placeholder="오픈카톡방 링크"
             value={OTTForm.kakaoLink}
             onChange={(e) => {
-              setOTTForm({ ...OTTForm, kakaoLink: e.target.value });
+              // setOTTForm({ ...OTTForm, kakaoLink: e.target.value });
             }}
           />
 
-          <MarginedTextArea
+          <textarea
             placeholder="메모(선택)"
-            value={OTTForm.memo}
+            text={OTTForm.memo}
             onChange={(e) => {
-              console.log(e.target.value);
+              console.log(e);
+              console.log(memo);
+              setMemo(e.target.value);
               setOTTForm({ ...OTTForm, memo: e.target.value });
             }}
           />

@@ -4,7 +4,7 @@ import formParser from "../utils/formParser";
 import myAxios from "../utils/myAxios";
 
 const OTTFormState = atom({
-  key: "OTTForm",
+  key: "ottForm",
   default: {
     title: "",
     fee: "",
@@ -16,7 +16,7 @@ const OTTFormState = atom({
 });
 
 const OTTJSONFormState = selector({
-  key: "OTTJSONForm",
+  key: "ottJSONForm",
   get: ({ get }) => {
     const OTTForm = get(OTTFormState);
     return formParser.changeOTTFormToJSON(OTTForm);
