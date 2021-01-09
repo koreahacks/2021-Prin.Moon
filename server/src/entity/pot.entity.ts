@@ -22,7 +22,7 @@ export default class PotEntity {
   @Column({ type: "varchar" })
   title!: string;
 
-  @Column({ type: "date", nullable: true })
+  @Column({ type: "datetime", nullable: true })
   endTime?: Date;
 
   @Column({ type: "double", nullable: true })
