@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import styled from "styled-components";
 import PageHeader from "../components/PageHeader";
 import Party from "../components/Party";
-import myAxios from '../utils/myAxios';
+import myAxios from "../utils/myAxios";
 const Body = styled.div`
   background: rgba(255, 174, 103, 0.15);
   display: block;
@@ -29,9 +29,16 @@ export default function RecruitedParty(props) {
     <Body>
       <PageHeader title={"내가 모집한 팟"} />
       <Parties>
-      {parties.map((party) => {
+        {parties.map((party) => {
           return (
-            <Party category={party.category} memo={party.memo} isRecruited={true} place={party.distance} title={party.title} time={party.createdAt} user={party.owner}></Party>
+            <Party
+              key={party.id}
+              isRecruited={true}
+              place={party.distance}
+              title={party.title}
+              time={party.createdAt}
+              user={party.owner}
+            />
           );
         })}
       </Parties>

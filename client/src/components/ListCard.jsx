@@ -29,10 +29,10 @@ export default function ListCard(props) {
         <StyledTitleText>{title}</StyledTitleText>
       </StyledListMiddleWrapper>
       <StyledListBottomWrapper>
-        <StyledDistanceText>{getTimeTillNow(createAt)}전</StyledDistanceText>
+        <StyledDistanceText>{getTimeTillNow(createAt)}</StyledDistanceText>
         {!totalPeople ? (
           <StyledEndTimeText>
-            {endTime ? `마감 ${getTimeTillNow(endTime)} 후` : `마감 없음`}
+            {endTime ? `마감 ${getTimeTillNow(endTime)}` : `마감 없음`}
           </StyledEndTimeText>
         ) : (
           <StyledEndTimeText>{`${joinedPeople} / ${totalPeople} 명`}</StyledEndTimeText>

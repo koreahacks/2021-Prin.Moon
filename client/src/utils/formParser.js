@@ -9,7 +9,7 @@ const formParser = {
   changeOTTFormToJSON: (OTTForm) => {
     return {
       ...OTTForm,
-      fee: parseInt(OTTForm.fee),
+      fee: OTTForm.fee,
       memo: OTTForm.memo.length === 0 ? null : OTTForm.memo,
       totalPeople: parseInt(OTTForm.totalPeople),
     };

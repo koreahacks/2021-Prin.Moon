@@ -25,7 +25,7 @@ const calculateCurrentTime = (time) => {
       (Time.MILLISECONDS_PER_SECOND * Time.SECONDS_PER_MINUTE)
     ).toString()
   );
-  if (minutesTillNow < 0) {
+  if (minutesTillNow <= 0) {
     isMinus = true;
     minutesTillNow = Math.abs(minutesTillNow);
   }
