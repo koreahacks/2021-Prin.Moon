@@ -10,7 +10,7 @@ export default class UserEntity {
   @Column({ type: "varchar" })
   name!: string;
 
-  @Column({ type: "int", default: 0 })
+  @Column({ type: "double", default: 0 })
   credibility!: number;
 
   @Column({ type: "int", default: 0 })
