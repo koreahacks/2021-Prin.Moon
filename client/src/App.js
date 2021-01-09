@@ -7,7 +7,6 @@ import LoginPage from "./pages/LoginPage";
 import MyPage from "./pages/MyPage";
 import RecruitedParty from "./pages/RecruitedParty";
 import ParticipatedParty from "./pages/ParticipatedParty";
-import PartyMakingPage from "./pages/PartyMakingPage";
 import CategorySelectPage from "./pages/CategorySelectPage";
 import DeliveryCategoryPage from "./pages/DeliveryCategoryPage";
 import OTTCategoryPage from "./pages/OTTCategoryPage";

@@ -4,7 +4,7 @@ import formParser from "../utils/formParser";
 import myAxios from "../utils/myAxios";
 
 const OTTFormState = atom({
-  key: "OTTForm",
+  key: "ottForm",
   default: {
     title: "",
     fee: "",
@@ -16,7 +16,7 @@ const OTTFormState = atom({
 });
 
 const OTTJSONFormState = selector({
-  key: "OTTJSONForm",
+  key: "ottJSONForm",
   get: ({ get }) => {
     const OTTForm = get(OTTFormState);
     return formParser.changeOTTFormToJSON(OTTForm);
@@ -29,7 +29,6 @@ export default function useMakeOTTPots() {
   const resetOTTForm = () => {
     setOTTForm({
       title: "",
-
       kakaoLink: "",
       memo: "",
       totalPeople: "",
@@ -37,13 +36,18 @@ export default function useMakeOTTPots() {
       categoryId: 2,
     });
   };
-  const postOTTPot = useCallback(async () => {
-    const modifiedOTTJSONForm = {
-      ...OTTJSONForm,
-    };
-    console.log(OTTJSONForm);
-    const response = await myAxios.post("/pot", modifiedOTTJSONForm);
-  }, [OTTJSONForm]);
+  const postOTTPot = useCallback(
+    async (memo, fee) => {
+      const modifiedOTTJSONForm = {
+        ...OTTJSONForm,
+        memo,
+        fee: parseInt(fee),
+      };
+
+      const response = await myAxios.post("/pot", modifiedOTTJSONForm);
+    },
+    [OTTJSONForm]
+  );
 
   return {
     OTTForm,

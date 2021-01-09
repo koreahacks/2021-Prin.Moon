@@ -1,44 +1,50 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import ListCard from "../components/ListCard";
 import PageHeader from "../components/PageHeader";
+import Spinner from "../components/Spinner";
+import myAxios from "../utils/myAxios";
 
 export default function DeliveryCategoryPage() {
-  const [location, setLocation] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+  const [ottList, setOttList] = useState([]);
+
+  const getOttCategory = async () => {
+    try {
+      const { data } = await myAxios.get(`/pot/category/2`);
+      setOttList(data);
+    } catch (error) {
+      setError(true);
+    }
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    getOttCategory();
+  }, []);
   return (
     <Wrapper>
       <PageHeader title={"OTT 서비스"} />
       <StyledListWrapper>
-        <ListCard
-          id={1}
-          distance={10}
-          title={"123"}
-          createAt={"2021-01-09T11:44:35.441Z"}
-        ></ListCard>
-        <ListCard
-          id={1}
-          distance={10}
-          title={"123"}
-          createAt={"2021-01-09T11:44:35.441Z"}
-          totalPeople={4}
-          joinedPeople={2}
-        ></ListCard>
-        <ListCard
-          id={1}
-          distance={10}
-          title={"123"}
-          createAt={"2021-01-09T11:44:35.441Z"}
-          totalPeople={4}
-          joinedPeople={2}
-        ></ListCard>
-        <ListCard
-          id={1}
-          distance={10}
-          title={"123"}
-          createAt={"2021-01-09T11:44:35.441Z"}
-          totalPeople={4}
-          joinedPeople={2}
-        ></ListCard>
+        {loading ? (
+          <Spinner />
+        ) : error ? (
+          <ListCard
+            title={"정보를 불러오는데 실패했습니다. 새로고침 해주세요."}
+          />
+        ) : (
+          ottList.map((ott) => (
+            <ListCard
+              key={ott.id}
+              id={ott.id}
+              title={ott.title}
+              createAt={ott.createAt}
+              totalPeople={ott.totalPeople}
+              joinedPeople={ott.joinedPeople}
+            />
+          ))
+        )}
       </StyledListWrapper>
     </Wrapper>
   );

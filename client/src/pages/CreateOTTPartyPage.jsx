@@ -15,15 +15,38 @@ const MarginedInput = styled(Input)`
   margin: 1vh 0;
 `;
 
-const MarginedTextArea = styled(TextArea)`
+const MarginedTextArea = styled.textarea`
   margin: 1vh 0;
+  width: 100%;
+  outline: none;
+  border: none;
+  border-radius: 20px;
+  padding: 15px;
+  resize: none;
+  height: 18.5vh;
+  font-family: "Noto Sans KR", sans-serif;
+
+  ::placeholder,
+  ::-webkit-input-placeholder {
+    text-align: center;
+    line-height: 18.5vh;
+    font-family: "Noto Sans KR", sans-serif;
+  }
+  :-ms-input-placeholder {
+    text-align: center;
+    line-height: 18.5vh;
+    font-family: "Noto Sans KR", sans-serif;
+  }
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 export default function CreateOTTPartyPage() {
   const { OTTForm, setOTTForm, postOTTPot, resetOTTForm } = useMakeOTTPots();
   const history = useHistory();
-
-  console.log(OTTForm);
+  const [fee, setFee] = React.useState("");
+  const [memo, setMemo] = React.useState("");
 
   return (
     <>
@@ -48,9 +71,9 @@ export default function CreateOTTPartyPage() {
 
           <MarginedInput
             placeholder="가격"
-            value={OTTForm.fee}
+            value={fee}
             onChange={(e) => {
-              setOTTForm({ ...OTTForm, fee: e.tareget.value });
+              setFee(e.target.value);
             }}
           />
 
@@ -64,22 +87,25 @@ export default function CreateOTTPartyPage() {
 
           <MarginedTextArea
             placeholder="메모(선택)"
-            value={OTTForm.memo}
+            text={OTTForm.memo}
             onChange={(e) => {
-              console.log(e.target.value);
-              setOTTForm({ ...OTTForm, memo: e.target.value });
+              setMemo(e.target.value);
             }}
           />
 
           <Button
-            color={Validation.isValidOTTForm(OTTForm) ? "primary" : "secondary"}
+            color={
+              Validation.isValidOTTForm({ ...OTTForm, fee, memo })
+                ? "primary"
+                : "secondary"
+            }
             onClick={
-              Validation.isValidOTTForm(OTTForm)
+              Validation.isValidOTTForm({ ...OTTForm, fee, memo })
                 ? async (e) => {
                     e.preventDefault();
                     if (window.confirm("게시글을 올리시겠어요?")) {
                       try {
-                        await postOTTPot();
+                        await postOTTPot(memo, fee);
                         alert("파티 모집글을 올렸습니다!");
                         resetOTTForm();
                         history.push("/");

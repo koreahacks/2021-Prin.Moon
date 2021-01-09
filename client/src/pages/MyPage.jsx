@@ -10,13 +10,11 @@ import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Collapse from "@material-ui/core/Collapse";
 import SvgIcon from "@material-ui/core/SvgIcon";
 import Bread from "../assets/bread2.jpg";
-import Header from "../components/Header";
-import { Link } from "react-router-dom";
-import RecruitedParty from "./RecruitedParty";
-import ParticipatedParty from "./ParticipatedParty";
-import LoginPage from "./LoginPage";
+import PageHeader from "../components/PageHeader";
+import { useHistory } from "react-router-dom";
 import myAxios from "../utils/myAxios";
 import env from "../common/const";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -54,7 +52,7 @@ const AvatarAlign = styled.div`
 const Name = styled.div`
   font-size: 5vw;
   display: flex;
-  jusity-content: center;
+  justify-content: center;
   padding: 1vw 0;
   align-items: flex-end;
 `;
@@ -72,7 +70,7 @@ const Ment = styled.div`
   padding: 2vw 0;
   display: flex;
   font-size: 3.5vw;
-  justiy-content: center;
+  justify-content: center;
   align-items: flex-end;
 `;
 const Money = styled.div`
@@ -106,7 +104,7 @@ const Breads = styled.div`
   display: flex;
   padding-top: 5%;
   padding-bottom: 5%;
-  align-contents: center;
+  align-items: center;
 `;
 const BreadMargin = styled.img`
   margin: 0 3%;
@@ -117,26 +115,18 @@ const BorderList = styled.div`
   border: 5px solid;
 `;
 
-const StyledLink = styled(Link)`
-  text-decoration: none;
-  color: black;
-
-  &:focus,
-  &:hover,
-  &:visited,
-  &:link,
-  &:active {
-    text-decoration: none;
-  }
-`;
-
 const LogoutA = styled.a`
   text-decoration: none;
   color: black;
 `;
 
+const StyledLink = styled.div`
+  width: 100%;
+`;
+
 export default function MyPage(props) {
   const classes = useStyles();
+  const history = useHistory();
   const [open, setOpen] = React.useState(true);
   const [info, setUserInfo] = React.useState({});
   const [isLogin, setIsLogin] = React.useState(true);
@@ -175,7 +165,7 @@ export default function MyPage(props) {
   };
   return (
     <Fragment>
-      <Header title={"나의 N빵"}></Header>
+      <PageHeader title={"나의 N빵"} type={"mypage"} />
       <Body>
         <AvatarAlign>
           <BadgeAvatar name={info.name} />
@@ -194,9 +184,10 @@ export default function MyPage(props) {
         <div className={classes.root}>
           <Paper elevation={2}>
             <Breads>
-              {breads.map((element) => {
+              {breads.map((element, index) => {
                 return (
                   <BreadMargin
+                    key={index}
                     src={Bread}
                     alt="bread"
                     id={element}
@@ -211,7 +202,11 @@ export default function MyPage(props) {
         </div>
       </Body>
       <List className={classes.listRoot}>
-        <StyledLink to="RecruitedParty">
+        <StyledLink
+          onClick={() => {
+            history.push("/recruitedParty");
+          }}
+        >
           <ListItem button>
             <ListItemAvatar>
               <HomeIcon color="primary" style={{ color: "#ff7800" }} />
@@ -223,7 +218,11 @@ export default function MyPage(props) {
             />
           </ListItem>
         </StyledLink>
-        <StyledLink to="ParticipatedParty">
+        <StyledLink
+          onClick={() => {
+            history.push("/participatedParty");
+          }}
+        >
           <ListItem button>
             <ListItemAvatar>
               <HomeIcon color="primary" style={{ color: "#ac5910" }} />
