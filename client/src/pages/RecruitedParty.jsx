@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import PageHeader from "../components/PageHeader";
 import Party from "../components/Party";
+import ListCard from "../components/ListCard";
 import myAxios from "../utils/myAxios";
 import { useHistory } from "react-router-dom";
 const Body = styled.div`
@@ -50,7 +51,6 @@ export default function RecruitedParty(props) {
     return (
       <Body>
         <PageHeader title={"내가 모집한 팟"} />
-        파티가 없습니다 ㅠ.ㅠ
         <Middle>
           <MoveToCreate
             onClick={() => {
@@ -68,14 +68,14 @@ export default function RecruitedParty(props) {
       <Parties>
         {parties.map((party) => {
           return (
-            <Party
+            <ListCard
               key={party.id}
-              isRecruited={true}
-              category={party.category}
-              place={party.distance}
+              id={party.id}
               title={party.title}
-              time={party.createdAt}
-              user={party.owner}
+              createAt={party.createAt}
+              endTime={party.endTime}
+              totalPeople={party.totalPeople}
+              joinedPeople={party.joinedPeople}
             />
           );
         })}

@@ -50,7 +50,6 @@ export default function ParticipatedParty(props) {
     return (
       <Body>
         <PageHeader title={"내가 참가한 팟"} />
-        파티가 없습니다 ㅠ.ㅠ
         <Middle>
           <MoveToCreate
             onClick={() => {
@@ -66,10 +65,10 @@ export default function ParticipatedParty(props) {
     <Body>
       <PageHeader title={"내가 참가한 팟"} />
       <Parties>
-        {parties.map((party) => {
+        {parties.map((party, index) => {
           return (
             <Party
-              key={party.id}
+              key={index}
               category={party.category}
               isRecruited={false}
               place={party.distance}

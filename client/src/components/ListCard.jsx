@@ -17,7 +17,11 @@ export default function ListCard(props) {
     <StyledListWrapper>
       <StyledListTopWrapper>
         <StyledDistanceText>
-          {distance ? calculateDistance(distance) : `${totalPeople}명 모집중`}
+          {distance
+            ? calculateDistance(distance)
+            : totalPeople
+            ? `${totalPeople}명 모집중`
+            : " "}
         </StyledDistanceText>
       </StyledListTopWrapper>
       <StyledListMiddleWrapper>
