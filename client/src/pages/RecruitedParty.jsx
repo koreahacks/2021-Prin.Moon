@@ -36,6 +36,11 @@ const MoveToCreate = styled.button`
 
 export default function RecruitedParty(props) {
   const [parties, setParties] = React.useState([]);
+  const [show, setShow] = React.useState(false);
+
+  const onToggle = () => {
+    setShow(!show);
+  };
   const history = useHistory();
   React.useEffect(() => {
     (async () => {
@@ -76,6 +81,7 @@ export default function RecruitedParty(props) {
               endTime={party.endTime}
               totalPeople={party.totalPeople}
               joinedPeople={party.joinedPeople}
+              pot={party}
             />
           );
         })}

@@ -47,8 +47,6 @@ export default function DeliveryCategoryPage() {
               totalPeople={ott.totalPeople}
               joinedPeople={ott.joinedPeople}
               pot={ott}
-              onToggle={onToggle}
-              show={show}
             />
           ))
         )}

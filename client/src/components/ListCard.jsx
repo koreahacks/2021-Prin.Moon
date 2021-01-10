@@ -13,48 +13,53 @@ export default function ListCard(props) {
     totalPeople,
     distance,
     pot,
-    onToggle,
-    show,
   } = props;
 
+  const [show, setShow] = React.useState(false);
+
+  const onToggle = () => {
+    setShow(!show);
+  };
   return (
-    <StyledListWrapper onClick={onToggle}>
-      <StyledListTopWrapper>
-        <StyledDistanceText>
-          {distance
-            ? calculateDistance(distance)
-            : totalPeople
-            ? `${totalPeople}명 모집중`
-            : " "}
-        </StyledDistanceText>
-      </StyledListTopWrapper>
-      <StyledListMiddleWrapper>
-        <StyledTitleText>{title}</StyledTitleText>
-      </StyledListMiddleWrapper>
-      <StyledListBottomWrapper>
-        <StyledDistanceText>
-          {getTimeTillNow(createAt, "past")} 모집
-        </StyledDistanceText>
-        {!totalPeople ? (
-          <StyledEndTimeText>
-            {endTime
-              ? `마감 ${getTimeTillNow(endTime, "future")}`
-              : `마감 없음`}
-          </StyledEndTimeText>
-        ) : (
-          <StyledEndTimeText>{`${
-            totalPeople - joinedPeople
-          } 자리남음!`}</StyledEndTimeText>
-        )}
-      </StyledListBottomWrapper>
+    <>
+      <StyledListWrapper onClick={onToggle}>
+        <StyledListTopWrapper>
+          <StyledDistanceText>
+            {distance
+              ? calculateDistance(distance)
+              : totalPeople
+              ? `${totalPeople}명 모집중`
+              : " "}
+          </StyledDistanceText>
+        </StyledListTopWrapper>
+        <StyledListMiddleWrapper>
+          <StyledTitleText>{title}</StyledTitleText>
+        </StyledListMiddleWrapper>
+        <StyledListBottomWrapper>
+          <StyledDistanceText>
+            {getTimeTillNow(createAt, "past")} 모집
+          </StyledDistanceText>
+          {!totalPeople ? (
+            <StyledEndTimeText>
+              {endTime
+                ? `마감 ${getTimeTillNow(endTime, "future")}`
+                : `마감 없음`}
+            </StyledEndTimeText>
+          ) : (
+            <StyledEndTimeText>{`${
+              totalPeople - joinedPeople
+            } 자리남음!`}</StyledEndTimeText>
+          )}
+        </StyledListBottomWrapper>
+      </StyledListWrapper>
       <BadalModal pot={pot} toggleModal={onToggle} show={show} />
-    </StyledListWrapper>
+    </>
   );
 }
 
 const StyledListWrapper = styled.div`
   width: 90vw;
-  height: 10vh;
+  height: 5rem;
   box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
   background-color: #ffffff;
   border-radius: 20px;
