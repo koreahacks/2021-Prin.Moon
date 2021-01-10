@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
-import CustomModal from "../CustomModal";
+import CustomModal from "./CustomModal";
 import styled from "styled-components";
-import Button from "../Button";
-import { getTimeTillNow } from "../../utils/date";
-import myAxios from "../../utils/myAxios";
+import Button from "./Button";
+import { getTimeTillNow } from "../utils/date";
+import myAxios from "../utils/myAxios";
 import { useHistory } from "react-router-dom";
 
 const ModalHeader = styled.div`
@@ -88,10 +88,10 @@ const ModalFooter = styled.div`
   padding-bottom: 0.5rem;
 `;
 
-export default function BadalModal({ ...props }) {
+export default function BadalModal(props) {
   const { toggleModal, show, pot } = props;
   const [onGoing, setOnGoing] = useState(null);
-  console.log(onGoing);
+
   const history = useHistory();
   const getIsOnGoing = async () => {
     const { data } = await myAxios.get(`/join/${pot.id}`);
@@ -113,12 +113,12 @@ export default function BadalModal({ ...props }) {
     e.preventDefault();
     window.open(pot.kakaoLink);
     const response = await myAxios.post("/join/apply", { potId: pot.id });
-    console.log(response);
+
     if (response.status === 201) {
       setOnGoing(true);
     }
   };
-  console.log(pot);
+
   return (
     <CustomModal show={show} onClick={toggleModal}>
       <ModalHeader>
@@ -128,14 +128,18 @@ export default function BadalModal({ ...props }) {
       <ModalBody>
         <ColumnWrapper>
           <BodyColumn>
-            <ColumnTitle>
-              <Title>앱 링크</Title>
-            </ColumnTitle>
-            <ColumnContent>
-              <Column>
-                <a href={pot.appLink}>바로 가기</a>
-              </Column>
-            </ColumnContent>
+            {pot.appLink && (
+              <>
+                <ColumnTitle>
+                  <Title>앱 링크</Title>
+                </ColumnTitle>
+                <ColumnContent>
+                  <Column>
+                    <a href={pot.appLink}>바로 가기</a>
+                  </Column>
+                </ColumnContent>
+              </>
+            )}
           </BodyColumn>
           <BodyColumn>
             <ColumnTitle>

@@ -39,7 +39,7 @@ export default function ParticipatedParty(props) {
   React.useEffect(() => {
     (async () => {
       const { data } = await myAxios.get("/pot/joined-pots");
-      console.log(data);
+
       if (data) {
         setParties(data);
       }
@@ -69,6 +69,7 @@ export default function ParticipatedParty(props) {
           return (
             <Party
               key={index}
+              id={party.id}
               category={party.category}
               isRecruited={false}
               place={party.distance}
