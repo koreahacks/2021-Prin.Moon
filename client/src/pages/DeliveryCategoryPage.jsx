@@ -28,7 +28,13 @@ export default function DeliveryCategoryPage() {
       );
       if (location) {
         const noEndTimeData = data.filter((item) => !item.endTime);
-        const endTimeData = data.filter((item) => calculateTime(item.endTime));
+        const endTimeData = data
+          .filter((item) => calculateTime(item.endTime))
+          .sort(
+            (item1, item2) =>
+              new Date(item1.endTime).getTime() -
+              new Date(item2.endTime).getTime()
+          );
         setDeliveryList([...endTimeData, ...noEndTimeData]);
       } else {
         setDeliveryList(data);
