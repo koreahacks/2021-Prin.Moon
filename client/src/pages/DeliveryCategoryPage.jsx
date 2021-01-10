@@ -91,7 +91,7 @@ const Wrapper = styled.div`
   align-items: center;
   width: 100vw;
   height: 100vh;
-  overflow: auto;
+
   background-color: rgba(255, 174, 103, 0.15);
 `;
 
