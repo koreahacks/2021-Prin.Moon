@@ -79,6 +79,7 @@ const Wrapper = styled.div`
 
 export default function Party(props) {
   const [count, setCount] = React.useState(0);
+  const [evaluate, setEvaluate] = React.useState(true);
   const breads = [1, 2, 3, 4, 5];
 
   const handleClick = (e) => {
@@ -91,10 +92,15 @@ export default function Party(props) {
       };
     }
   };
-  const handleCredibility = async () => {
-    await myAxios.put(`/user/credibility/${props.user.id}`, {
+  const handleCredibility = async (id) => {
+    const { data } = await myAxios.put(`/user/credibility/${props.user.id}`, {
       credibility: count,
+      potId: id,
     });
+
+    if (data.potInfo.length > 0) {
+      data.potInfo[0].isEvaluated && setEvaluate(false);
+    }
     alert("평가완료!");
   };
   return (
@@ -107,14 +113,28 @@ export default function Party(props) {
       </Info>
       {props.isRecruited || (
         <Modal
-          openButtonTitle={"신뢰도 평가하기"}
+          openButtonTitle={"평가하기"}
           openButtonColor={"primary"}
           title={"왓챠 팟 구함"}
-          buttons={[
-            <Button color={"primary"} onClick={handleCredibility} width="2rem">
-              평가하기
-            </Button>,
-          ]}
+          buttons={
+            evaluate
+              ? [
+                  <Button
+                    color={"primary"}
+                    onClick={() => {
+                      handleCredibility(props.id);
+                    }}
+                    width="8rem"
+                  >
+                    평가하기
+                  </Button>,
+                ]
+              : [
+                  <Button color={"secondary"} disabled={true} width="8rem">
+                    평가완료
+                  </Button>,
+                ]
+          }
         >
           <Wrapper>
             <Ment>

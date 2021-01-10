@@ -12,6 +12,11 @@ export default function DeliveryCategoryPage() {
   const [error, setError] = useState(false);
   const [location, setLocation] = useState(false);
   const [deliveryList, setDeliveryList] = useState([]);
+  const [show, setShow] = useState(false);
+
+  const onToggle = () => {
+    setShow(!show);
+  };
 
   const calculateTime = (time) => {
     if (!time) return false;
@@ -69,6 +74,9 @@ export default function DeliveryCategoryPage() {
               title={delivery.title}
               createAt={delivery.createAt}
               endTime={delivery.endTime}
+              pot={delivery}
+              onToggle={onToggle}
+              show={show}
             />
           ))
         )}

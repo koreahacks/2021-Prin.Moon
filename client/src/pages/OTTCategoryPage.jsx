@@ -9,7 +9,11 @@ export default function DeliveryCategoryPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [ottList, setOttList] = useState([]);
+  const [show, setShow] = useState(false);
 
+  const onToggle = () => {
+    setShow(!show);
+  };
   const getOttCategory = async () => {
     try {
       const { data } = await myAxios.get(`/pot/category/2`);
@@ -42,6 +46,9 @@ export default function DeliveryCategoryPage() {
               createAt={ott.createAt}
               totalPeople={ott.totalPeople}
               joinedPeople={ott.joinedPeople}
+              pot={ott}
+              onToggle={onToggle}
+              show={show}
             />
           ))
         )}

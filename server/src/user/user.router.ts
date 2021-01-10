@@ -1,6 +1,8 @@
 import express, { Request, Response } from "express";
 import UserJoinPotService from "../user-join-pot/user-join-pot.service";
 import UserService from "./user.service";
+import PotEntity from "../entity/pot.entity";
+import { getRepository } from "typeorm";
 
 const UserRouter = express.Router();
 
@@ -23,13 +25,17 @@ UserRouter.put("/saved-money", async (req: Request, res: Response) => {
 UserRouter.put("/credibility/:userId", async (req: Request, res: Response) => {
   const { userId } = req.params;
   const { credibility, potId } = req.body;
-  const { code, json } = await UserService.updateUserCredibility(
-    Number(userId),
-    credibility
-  );
+  await UserService.updateUserCredibility(Number(userId), credibility);
   await UserJoinPotService.finishEvaluation(req.user?.id as number, potId);
-
-  res.status(code).json(json);
+  const potRepository = getRepository(PotEntity);
+  const potInfo = await potRepository.findOne({
+    relations: ["owner", "userJoinPot", "category"],
+    where: { id: potId },
+  });
+  const userJoinPot = potInfo?.userJoinPot?.filter(
+    (item) => item.userId === req.user?.id
+  );
+  res.json({ potInfo: userJoinPot });
 });
 
 UserRouter.get("/logout", (req: Request, res: Response) => {

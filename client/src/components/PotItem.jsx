@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import BadalModal from "./JoinModals/BadalModal";
+import BadalModal from "./BadalModal";
 import styled from "styled-components";
 import { getTimeTillNow } from "../utils/date";
 
