@@ -61,12 +61,21 @@ const Title = styled.div`
 
 const ColumnContent = styled.div`
   display: flex;
-  width: 40%;
+  width: 50%;
   text-align: center;
 `;
 
 const Column = styled.div`
   width: 5rem;
+  font-weight: bold;
+
+  a {
+    width: 100px;
+    font-size: 0.9rem;
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+  }
 `;
 
 const ColumnWrapper = styled.div``;
@@ -81,36 +90,35 @@ const ModalFooter = styled.div`
 
 export default function BadalModal({ ...props }) {
   const { toggleModal, show, pot } = props;
-  const [state, setState] = useState(false);
-  const onGoing = useRef(false);
+  const [onGoing, setOnGoing] = useState(null);
+  console.log(onGoing);
   const history = useHistory();
   const getIsOnGoing = async () => {
     const { data } = await myAxios.get(`/join/${pot.id}`);
-    onGoing.current = data.isOnGoing;
-    console.log(onGoing.current);
+    setOnGoing(data.isOnGoing);
   };
-
-  console.log(onGoing.current);
 
   useEffect(() => {
     getIsOnGoing();
-  }, [show, onGoing.current]);
+  }, []);
 
-  const confirm = async () => {
+  const confirm = async (e) => {
+    e.preventDefault();
     const response = await myAxios.put(`/join/confirm/${pot.id}`);
     if (response.status === 200) history.push("/participatedParty");
     toggleModal();
   };
 
-  const joinPot = async () => {
+  const joinPot = async (e) => {
+    e.preventDefault();
     window.open(pot.kakaoLink);
     const response = await myAxios.post("/join/apply", { potId: pot.id });
+    console.log(response);
     if (response.status === 201) {
-      onGoing.current = true;
-      setState(!state);
+      setOnGoing(true);
     }
   };
-
+  console.log(pot);
   return (
     <CustomModal show={show} onClick={toggleModal}>
       <ModalHeader>
@@ -121,24 +129,34 @@ export default function BadalModal({ ...props }) {
         <ColumnWrapper>
           <BodyColumn>
             <ColumnTitle>
+              <Title>앱 링크</Title>
+            </ColumnTitle>
+            <ColumnContent>
+              <Column>
+                <a href={pot.appLink}>바로 가기</a>
+              </Column>
+            </ColumnContent>
+          </BodyColumn>
+          <BodyColumn>
+            <ColumnTitle>
+              <Title>마감기한</Title>
+            </ColumnTitle>
+            <ColumnContent>
+              <Column>{getTimeTillNow(pot.endTime)} </Column>
+            </ColumnContent>
+          </BodyColumn>
+          <BodyColumn>
+            <ColumnTitle>
               <Title>필요금액</Title>
             </ColumnTitle>
             <ColumnContent>
               <Column>{pot.fee}</Column>
             </ColumnContent>
           </BodyColumn>
-          <BodyColumn>
-            <ColumnTitle>마감기한</ColumnTitle>
-            <ColumnContent>{getTimeTillNow(pot.endTime)}</ColumnContent>
-          </BodyColumn>
-          <BodyColumn>
-            <ColumnTitle>필요금액</ColumnTitle>
-            <ColumnContent>{pot.fee}</ColumnContent>
-          </BodyColumn>
         </ColumnWrapper>
       </ModalBody>
       <ModalFooter>
-        {onGoing.current ? (
+        {onGoing ? (
           <Button onClick={confirm} color={"secondary"}>
             확정하기
           </Button>
