@@ -83,7 +83,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100vw;
-  height: 100vh;
+  height: auto;
 
   background-color: rgba(255, 174, 103, 0.15);
 `;
@@ -93,7 +93,7 @@ const StyledListWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  height: auto;
+  height: 100vh;
 `;
 
 const StyledFilter = styled.div`

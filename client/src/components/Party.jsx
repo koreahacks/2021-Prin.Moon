@@ -115,7 +115,7 @@ export default function Party(props) {
         <Modal
           openButtonTitle={"평가하기"}
           openButtonColor={"primary"}
-          title={"왓챠 팟 구함"}
+          title={props.title}
           buttons={
             evaluate
               ? [
